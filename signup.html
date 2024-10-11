@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Pristine Clean</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+    </head>
+    <body>
+
+        <form action="submit.js" method="post">
+            
+            <p style="text-align:center; color: #0071bc; font-weight: 700;">
+                <img src="./assets/logo.png" width="150" ><br>
+                Award-Winning Cleaning Services in the World
+            </p>
+            <p style="text-align:center;"> Sparkling spaces, stress-free living—let us handle the mess! Experience the difference with Pristine Clean Co., where every corner sparkles!</p>
+            <p>
+                <input type="text" id="first_name" name="first_name" placeholder="First Name">
+                <input type="text" id="last_name" name="last_name" placeholder="Last Name">  
+            </p>
+            <p><input type="text" id="email" name="email" placeholder="Email"></p>
+            <p><input type="text" id="phone" name="phone" placeholder="Phone Number"></p>
+            <p><input type="text" id="address" name="address" placeholder="Address"></p>
+            <p>
+                <select id="service" name="service">
+                    <option value="" disabled selected>Type of Service*</option>
+                    <option value="regular">Regular Interior Cleaning</option>
+                    <option value="major">Major Interior Cleaning</option>
+                    <option value="exterior">Exterior Cleaning</option>
+                    <option value="comprehensive">Comprehensive Cleaning (major interior and exterior cleaning)</option>
+                </select>
+            </p>
+            <input type="submit" value="VIEW PRICING">
+        </form>
+        
+    </body>
+</html>
