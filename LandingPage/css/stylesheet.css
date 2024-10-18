@@ -1,0 +1,117 @@
+html{
+    scroll-behavior: smooth;
+}
+header{
+    background-color: white;
+    top:0;
+    margin:0;
+    padding:0;
+    height:80px;
+    max-height: 80px;
+    position: sticky;
+    align-content: center;
+    z-index: 999;
+}
+body
+{
+    margin :0 auto;
+}
+h1{
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    font-size: 36px;
+}
+p,h2
+{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#Info{
+    top:0;
+    margin: 0;
+    background-color: #0071bc;
+    height: 50px;
+    align-content: center;
+    color: white;
+}
+.Navigation{
+    color: black;
+    background-color: white;
+    border:0;
+    height: 80px;
+    font-size: 16px;
+}
+.center{
+    font-size: 14px;
+    text-align: center;
+}
+span{
+    font-family: Arial, Helvetica, sans-serif;
+}
+#OurS,#WU,#CU{
+    background-color: rgb(248, 248, 248);
+}
+#HIW,#AU,#FAQ{
+    background-color: white;
+}
+#logo{
+    width: 80px;
+    height: 80px;
+    position:absolute;
+    bottom:0;
+    left:20px;
+}
+.container{
+    margin:auto;
+    position: relative;
+    align-content: top;
+    max-width: 1000px;
+}
+#box1{
+    height: 150px;
+}
+div #leftbox{
+    position:absolute;
+    left:0;
+}
+div #leftbox1{
+    position:absolute;
+    left:250px;
+}
+div #rightbox{
+    position:absolute;
+    right:0;
+}
+div #rightbox1{
+    position:absolute;
+    right:250px;
+}
+div #centerbox{
+    position:absolute;
+    left:450px;
+}
+.InstructionImg{
+    width: 80px;
+    height: 80px;
+}
+#form{
+    margin:auto;
+    background-image: url(../Images/CleanHouse.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: scroll;
+    background-size: 60% 100%;
+}
+.CleaningChoicesImages{
+    height: 200px;
+    width:200px;
+    border-radius: 50%;
+}
+#AboutUsImg{
+    width:30%;
+    height:30%;
+    padding:30px;
+}
+#AboutUsh1{
+    text-align: left;
+    font-size: 36px;
+}
