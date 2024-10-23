@@ -1,0 +1,88 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body {
+  font-family: Arial;
+  color: white;
+}
+
+.split {
+  height: 100%;
+  width: 50%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.left {
+  left: 0;
+  background-color: #03c9dc;
+}
+
+.right {
+  right: 0;
+  background-color: #0071bc;
+}
+.centered1 {
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered3 {
+  position: absolute;
+  bottom: 15%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.centered img {
+  width: 150px;
+  border-radius: 50%;
+}
+.SignUpButton{
+  border-radius: 40px;
+  border: 0;
+  color: white;
+  background-color: #29bc00;
+  height: 50px;
+  font-size: 20px;
+  padding:15px;
+}
+</style>
+</head>
+<body>
+
+<div class="split left">
+  <div class="centered1">
+    <h1>Sign Up as Client</h1>
+    <button class="SignUpButton" type="button" onclick="document.location='./signup.html'">Sign Up</button>
+  </div>
+  <div class="centered3">
+    <h1>Sign In as Client</h1>
+    <button class="SignUpButton" type="button" onclick="document.location='./login.html'">Sign In</button>
+  </div>
+</div>
+
+<div class="split right">
+  <div class="centered2">
+    <img src="./Images/Business_Icon.png">
+    <h1>Log In as Business Owner</h1>
+    <button class="SignUpButton" type="button" onclick="document.location='./login.html'">Log In</button>
+  </div>
+</div>
+     
+</body>
+</html> 
