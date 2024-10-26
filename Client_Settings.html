@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pristine Clean</title> <!--Compagny name will be changed-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
+</head> 
+<body>
+    
+    <!-- Navigation bar -->
+    <nav>
+        <ul class="navbar">
+            <!-- Logo on the left -->
+            <div class="navbar-left">
+                <li><a href="#" class="logo"><i class='bx bx-home-circle'></i></i> Pristine Clean</a></li>
+            </div>
+
+            <!-- Centered items -->
+            <div class="navbar-center">
+                <li><a href="#">How it Works</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">About Us</a></li>
+            </div>
+        </ul>
+    </nav>
+
+
+    <!-- Side bar -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="Images/user-circle-solid-96.png" class="user-img" width="50px">
+            <div>
+                <p class="bold">John Doe</p>
+                <p>User</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="Client_Dashboard.html">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-receipt'></i>
+                    <span class="nav-item">Receipt</span>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <i class='bx bxs-cart'></i>
+                    <span class="nav-item">Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Client_Settings.html">
+                    <i class="bx bxs-cog"></i>
+                    <span class="nav-item">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="LandingPage.html" id="red">
+                    <i class='bx bx-log-out'></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h2>Your Profile</h2> <br>
+
+            <!-- Profile Information Form -->
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="name">First Name:</label><br>
+                    <input type="text" id="name" placeholder="First Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name:</label><br>
+                    <input type="text" id="lastName" placeholder="Last Name">
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Email address::</label><br>
+                    <input type="text" id="email" placeholder="Email Address">
+                </div>
+                <div class="form-group">
+                    <label for="address">Address:</label><br>
+                    <input type="text" id="address" placeholder="Address">
+                </div>
+                <div class="form-group">
+                    <label for="phoneNumber">Phone Number:</label><br>
+                    <input type="text" id="phoneNumber" placeholder="Phone Number">
+                </div> <br>
+
+                <!-- Update and Delete Buttons -->
+                <button type="button" onclick="updateProfile()">Update Profile</button>
+                <button type="button" onclick="deleteAccount()" style="color: red;">Delete Account</button>
+            </form>
+        </div>
+    </div>
+
+
+</body>
+<script src="js/client_data_structure.js"></script>
+<script>
+    let btn = document.querySelector("#btn")
+    let sidebar = document.querySelector('.sidebar')
+
+    // Toggle Sidebar
+    btn.onclick = function(){
+        sidebar.classList.toggle('active');
+    };
+</script>
+</html>
