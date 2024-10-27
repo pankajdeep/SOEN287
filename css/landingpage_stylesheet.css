@@ -9,8 +9,11 @@ html{
     height:80px;
     max-height: 80px;
     position: sticky;
-    align-content: center;
+    justify-content: space-evenly;
     z-index: 999;
+    display: flex;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
 }
 @media (max-width: 900px){
     #NavHeader{
@@ -36,8 +39,16 @@ p,h2
     margin: 0;
     background-color: #0071bc;
     height: 50px;
-    align-content: center;
+    align-items: center;
+    justify-content: center;
     color: white;
+    display: flex;
+    gap: 40px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.icon-info {
+    display: flex;
+    gap: 15px;
 }
 .Navigation{
     color: black;
@@ -65,9 +76,18 @@ span{
 #logo{
     width: 80px;
     height: 80px;
-    position:absolute;
     top:0;
     left:20px;
+}
+#NavMenu {
+    padding: 0;
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+.menu-link {
+    text-decoration: none;
+    color: #000000;
 }
 .container{
     margin:auto;
@@ -117,8 +137,8 @@ span{
     font-size: 36px;
 }
 .TopPageIcons{
-    max-height: 40%;
-    height: 40%;
+    max-height: 20px;
+    height: 20px;
     width: auto;
 }
 #SigninButton{
@@ -128,4 +148,10 @@ span{
     border-radius: 40px;
     height: 50px;
     font-size: 20px;
+}
+
+@media screen and (max-width: 575px) {
+    #NavHeader {
+        flex-direction: column;
+    }
 }
