@@ -2,10 +2,11 @@
 <html>
     <head>
         <title>Pristine Clean</title>
-        <link rel="stylesheet" type="text/css" href="css/login_signup_stylesheet.css">
+        <link rel="stylesheet" type="text/css" href="./css/login_signup_stylesheet.css">
     </head>
     <body>
-        <form action="submit.js" method="post">
+        <form id="LogInInfo">
+            <!--action="submit.js" method="post"-->
             <h1>Log in as a Business</h1>
             <p style="text-align:center;">Log in to manage your services, edit business information and more.</p>
             <p style="text-align:center;">
@@ -16,11 +17,15 @@
                 <label for="password">Password:&nbsp;&nbsp;&nbsp;&nbsp;<br></label>
                 <input type="password" id="password" name="password" placeholder="Enter your Password">
             </p> 
-            <input type="submit" value="Log In">
+            <p id="Warning"></p>
+            <!-- We will use this in final product <input onclick="CheckLogInInfo()" type="submit" value="Log In">-->
+            <button id="tempButton" type="button" onclick="CheckLogInInfoBusiness()">Log In</button>
             <br><br>
             <p style="text-align: center;">
                 Don't have an account? Ask your supervisor to provide you with a pre-established business log in information.
             </p>
         </form>
+        <script src="./js/Login.js">    
+        </script>
     </body>
 </html>

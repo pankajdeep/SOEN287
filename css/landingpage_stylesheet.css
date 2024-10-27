@@ -9,9 +9,8 @@ html{
     height:80px;
     max-height: 80px;
     position: sticky;
-    justify-content: space-evenly;
+    align-content: center;
     z-index: 999;
-    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
 }
 
@@ -52,7 +51,38 @@ p,h2
     height: 80px;
     font-size: 2vw;
 }
+#NavMenu{
+    background-color: white;
+    position: absolute;
+    top:0;
+    align-items: center;
+    left:100px;
+    height: 100%;
+    padding:0;
+}
+#NavBox1{
+    position: relative;
+    top:0;
+    left :0;
+}
 
+#NavBox2{
+    position: relative;
+    top:0;
+    left :4vw;
+}
+#NavBox3{
+    position: relative;
+    top:0;
+    left :8vw;
+}
+#NavBox4{
+    position: relative;
+    left:12vw;
+}
+.NavSize{
+    width:10%;
+}
 .center{
     font-size: 14px;
     text-align: center;
@@ -66,24 +96,11 @@ span{
 #HIW,#AU,#FAQ{
     background-color: white;
 }
-#HIW-Heading1 {
-    margin: 51px 0 34px;
-}
 #logo{
     width: 80px;
     height: 80px;
     top:0;
     left:20px;
-}
-#NavMenu {
-    padding: 0;
-    display: flex;
-    gap: 40px;
-    list-style: none;
-}
-.menu-link {
-    text-decoration: none;
-    color: #000000;
 }
 .container{
     margin:auto;
@@ -148,17 +165,14 @@ span{
     height: 50px;
     font-size: 2vw;
 }
+#SigninButton:hover{
+    background-color: #0099ff;
+}
 .contentheader{
     padding-top: 100px;
     padding-bottom: 100px;
 }
-@media (max-width: 925px){
-    #NavHeader{
-        height:160px;
-        max-height:160px;
-    }
-}
-@media screen and (min-width: 950px){
+@media screen and (min-width: 925px){
     .Navigation{
         font-size: 16px;
     }
