@@ -4,28 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pristine Clean</title> <!--Compagny name will be changed-->
+    <title>Dashboard</title> <!--Compagny name will be changed-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
 </head> 
 <body>
     
     <!-- Navigation bar -->
-    <nav>
+    <!-- <nav>
         <ul class="navbar">
-            <!-- Logo on the left -->
             <div class="navbar-left">
                 <li><a href="#" class="logo"><i class='bx bx-home-circle'></i></i> Pristine Clean</a></li>
             </div>
 
-            <!-- Centered items -->
             <div class="navbar-center">
                 <li><a href="#">How it Works</a></li>
                 <li><a href="#">Our Services</a></li>
                 <li><a href="#">About Us</a></li>
             </div>
         </ul>
-    </nav>
+    </nav> -->
 
 
     <!-- Side bar -->
@@ -51,23 +49,30 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./Client_Receipt.html">
                     <i class='bx bxs-receipt'></i>
                     <span class="nav-item">Receipt</span>
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bxs-cart'></i>
-                    <span class="nav-item">Services</span>
+                <a href="./Client_Book_Services.html">
+                    <i class='bx bxs-cart-add' ></i>
+                    <span class="nav-item">Book Services</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./Client_Cancel_Services.html">
+                    <i class='bx bxs-cart' ></i>
+                    <span class="nav-item">Cancel Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Client_Settings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="nav-item">Settings</span>
                 </a>
             </li>
+            
             <li>
                 <a href="LandingPage.html" id="red">
                     <i class='bx bx-log-out'></i>
@@ -78,22 +83,24 @@
     </div>
 
     <!-- Main Content -->
-    <!-- Main Content -->
     <div class="main-content">
         <div class="container">
-            <h2>Dashboard</h2>
+            <div class="dashboard">
+                <h2>Dashboard</h2><br>
             
-            <!-- Future Appointments Section -->
-            <h3>Your Upcoming Appointments</h3>
-            <div class="appointments future-appointments">
-                <!-- Future appointments will be dynamically inserted here -->
+                <!-- Future Appointments Section -->
+                <h3>Your Upcoming Appointments</h3>
+                <div class="appointments future-appointments">
+                    <!-- Future appointments will be dynamically inserted here -->
+                </div><br><hr><br>
+                
+                <!-- Past Appointments Section -->
+                <h3>Your Past Appointments</h3>
+                <div class="appointments past-appointments">
+                    <!-- Past appointments will be dynamically inserted here -->
+                </div>
             </div>
             
-            <!-- Past Appointments Section -->
-            <h3>Your Past Appointments</h3>
-            <div class="appointments past-appointments">
-                <!-- Past appointments will be dynamically inserted here -->
-            </div>
         </div>
     </div>
 

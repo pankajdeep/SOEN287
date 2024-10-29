@@ -4,28 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pristine Clean</title> <!--Compagny name will be changed-->
+    <title>Receipts</title> <!--Compagny name will be changed-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="css/client_services.css">
+    <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
 </head> 
 <body>
     
     <!-- Navigation bar -->
-    <nav>
+    <!-- <nav>
         <ul class="navbar">
-            <!-- Logo on the left -->
             <div class="navbar-left">
                 <li><a href="#" class="logo"><i class='bx bx-home-circle'></i></i> Pristine Clean</a></li>
             </div>
 
-            <!-- Centered items -->
             <div class="navbar-center">
                 <li><a href="#">How it Works</a></li>
                 <li><a href="#">Our Services</a></li>
                 <li><a href="#">About Us</a></li>
             </div>
         </ul>
-    </nav>
+    </nav> -->
 
 
     <!-- Side bar -->
@@ -51,19 +49,25 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./Client_Receipt.html">
                     <i class='bx bxs-receipt'></i>
                     <span class="nav-item">Receipt</span>
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bxs-cart'></i>
-                    <span class="nav-item">Services</span>
+                <a href="./Client_Book_Services.html">
+                    <i class='bx bxs-cart-add' ></i>
+                    <span class="nav-item">Book Services</span>
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./Client_Cancel_Services.html">
+                    <i class='bx bxs-cart' ></i>
+                    <span class="nav-item">Cancel Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="./Client_Settings.html">
                     <i class="bx bxs-cog"></i>
                     <span class="nav-item">Settings</span>
                 </a>
@@ -76,38 +80,25 @@
             </li>
         </ul>
     </div>
-    <div class="form-container">
-        <form class="service-form">
-            <label for="service">Service:</label>
-            <select id="service" name="service">
-                <option value="" disabled selected>Select a service</option>
-                <option value="cleaning">Cleaning</option>
-                <option value="maintenance">Maintenance</option>
-            </select>
-    
-            <label for="date">Date:</label>
-            <input type="date" id="date" name="date">
-    
-            <label for="address">Address:</label>
-            <input type="text" id="address" name="address" placeholder="Enter address">
-    
-            <label for="size">Room size:</label>
-            <input type="text" id="size" name="size" placeholder="Enter room size">
-        </form>
-    
-        <div class="add-button-container">
-            <button class="add-button">+</button>
-        </div>
-    </div>
-    <h3 >Your Past Appointments</h3>
-            <div class="appointments past-appointments">
-                <!-- Past appointments will be dynamically inserted here -->
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <div class="receipt">
+                <h2>Receipt</h2> <br>
+                <h3>Unpaid Appointments</h3>
+                <div class="unpaid-appointments"></div>
+                <div class="total-due"></div>
+                <br><hr>
+                <br><h3>Paid Appointments</h3>
+                <div class="paid-appointments"></div>
+                <div class="total-paid"></div>
             </div>
         </div>
     </div>
 
 </body>
-<script src="js/client_data_structure.js"></script>
+<script src="js/client_data_structure_receipt.js"></script>
 <script>
     let btn = document.querySelector("#btn")
     let sidebar = document.querySelector('.sidebar')
@@ -117,6 +108,4 @@
         sidebar.classList.toggle('active');
     };
 </script>
-    
-</body>
 </html>
