@@ -19,7 +19,7 @@ function CheckLogInInfoClient(){
     const login_info = document.forms[0];
     
     if((login_info.elements[0].value==client_login_email)&&(login_info.elements[1].value==client_password)){
-        document.location="./LandingPage.html";
+        document.location="./Client_Dashboard.html";
     }else{
         const warning = document.getElementById("Warning");
         warning.innerHTML="* Wrong log in email or password.";
