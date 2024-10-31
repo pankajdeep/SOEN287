@@ -9,7 +9,7 @@ html{
     height:80px;
     max-height: 80px;
     position: sticky;
-    align-content: center;
+    justify-content: space-evenly;
     z-index: 999;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -102,6 +102,16 @@ span{
     top:0;
     left:20px;
 }
+#NavMenu {
+    padding: 0;
+    display: flex;
+    gap: 40px;
+    list-style: none;
+}
+.menu-link {
+    text-decoration: none;
+    color: #000000;
+}
 .container{
     margin:auto;
     position: relative;
@@ -178,6 +188,5 @@ span{
     }
     #SigninButton{
         font-size: 16px;
-
     }
 }
