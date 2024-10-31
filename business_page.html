@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Business Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/businesspage_stylesheet.css">  
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	</head>
+	<body>
+        <aside id="sidebar">
+            <ul>
+                <li class="menu-option" onclick="clickOptions('Profile')">Profile</li>
+                <li class="menu-option" onclick="clickOptions('Services')">Modify Services</li>
+                <li class="menu-option" onclick="clickOptions('History')">History</li>
+                <li class="menu-option" onclick="clickOptions('Receipts')">Bills & Receipts</li>
+            </ul>
+        </aside>
+        <main id="main-content">
+            <section id="profile">
+                <header>
+                    <h2><u>Profile</u></h2>
+                </header>
+                <div id="profile-editor">
+                    <div id="account-image">
+                        <img id="account-photo" class="photo-image" src="Images/account-photo.png" alt="Account Photo" />
+                    </div>
+                    <div id="profile-table">
+                        <table id="profile-info">
+                            <tr>
+                                <th>Name:</th>
+                                <td id="profile-name">user123</td>
+                            </tr>
+                            <tr>
+                                <th>Email:</th>
+                                <td id="profile-email">user123@gmail.com</td>
+                            </tr>
+                            <tr>
+                                <th>Phone Number:</th>
+                                <td id="profile-phone">1223311111</td>
+                            </tr>
+                            <tr>
+                                <th>Date Of Birth:</th>
+                                <td id="profile-birthday">1989-12-31</td>
+                            </tr>
+                        </table>
+                        <button type="button" id="editProfileBTN" onclick="editProfile()">Edit Profile</button>
+                    </div>
+                    <div id="editProfileInfo">
+                        <form method="POST" name="profile" id="account-form">
+                            <div class="input-container">
+                                <label for="name">Name:</label>
+                                <input id="name" name="name" type="text" required /> 
+                            </div>
+                            <div class="input-container">
+                                <label for="email">Email Address:</label>
+                                <input id="email" name="email" type="email" required />
+                            </div>
+                            <div class="input-container">
+                                <label for="phone_number">Phone Number:</label>
+                                <input id="phone_number" name="phone_number" type="tel" pattern="[0-9]{9}" required /> 
+                            </div>
+                            <div class="input-container">
+                                <label for="birthday">Date Of Birth:</label>
+                                <input id="birthday" name="birthday" type="date" required />
+                            </div>
+                        </form>
+                        <button type="button" id="saveChanges" onclick="saveChanges()">Submit Changes</button>
+                    </div>
+                </div>
+            </section>
+            <section id="modify-services">
+                <header>
+                    <h2><u>Modify Services</u></h2>
+                </header>
+                <section id="change-logo">
+                    <div id="image-uploader">
+                        <h3><u>Change Logo</u>:</h3>
+                        <div id="logo-editor">
+                            <form method="POST" name="logo" id="logo-upload">
+                                <div class="input-container" style="max-width:130px;">
+                                    <input type="file" id="logo-file" name="logo-file" accept=".png, .jpg, .gif" />
+                                    <label for="logo-file" id="logo-file-label">+ Upload File</label>    
+                                </div>
+                            </form>
+                        </div>
+                        <div id="change-file">
+                            <div id="file-info">
+                                <!--Changing the logo file-->
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-arrow">
+                        <p>&rarr;</p>
+                    </div>
+                    <figure id="logo-container">
+                        <img id="current-logo" class="photo-image" src="Images/account-photo.png" alt="Account Photo" />
+                        <figcaption>Service Logo</figcaption>
+                    </figure>
+                </section>
+                <section id="add-services-section">
+                    <h3><u>Add Services</u>:</h3>
+                    <form method="POST" name="services" id="add-services">
+                        <div class="input-container">
+                            <label for="serviceName">Name:</label>    
+                            <input type="text" id="serviceName" name="serviceName" required />
+                        </div>
+                        <div class="input-container">
+                            <label for="description">Description:</label>
+                            <textarea class="textarea" id="description" name="description"></textarea>
+                        </div>
+                        <div class="input-container">
+                            <label for="price">Price:</label>
+                            <input type="number" min="5.00" id="price" name="price" required />
+                        </div>
+                    </form>
+                    <button id="add-btn" onclick="addData()">Add</button>
+                </section>
+                <table id="serviceTable">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Action</th>
+                    </tr>
+                </table>
+            </section>
+            <section id="history">
+                <h2><u>History</u></h2>
+                <div id="past-services">
+                    <!--Inserting past services-->
+                </div>
+            </section>
+            <section id="bill-receipts">
+                <h2><u>Bills & Receipts</u></h2>
+                <div id="appointed-services">
+                    <!--Inserting appointed services-->
+                </div>
+            </section>
+        </main>
+        <script src="js/businesspage_script.js"></script>
+	</body>
+</html>
