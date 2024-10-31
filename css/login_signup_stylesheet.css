@@ -190,6 +190,7 @@ a {
 }
 #Warning{
     color:red;
+    padding-left: 10px;
 }
 #tempButton{
     align-items: center;

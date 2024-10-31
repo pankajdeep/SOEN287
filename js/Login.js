@@ -8,7 +8,7 @@ function CheckLogInInfoBusiness(){
     const login_info = document.forms[0];
     
     if((login_info.elements[0].value==business_login_email)&&(login_info.elements[1].value==business_password)){
-        document.location="./LandingPage.html";
+        document.location="./business_page.html";
     }else{
         const warning = document.getElementById("Warning");
         warning.innerHTML="* Wrong log in email or password.";
