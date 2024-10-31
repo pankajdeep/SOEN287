@@ -11,16 +11,10 @@ html{
     position: sticky;
     justify-content: space-evenly;
     z-index: 999;
-    display: flex;
-    align-items: center;
     font-family: Arial, Helvetica, sans-serif;
 }
-@media (max-width: 900px){
-    #NavHeader{
-        height:160px;
-        max-height:160px;
-    }
-}
+
+
 body
 {
     margin :0 auto;
@@ -55,7 +49,39 @@ p,h2
     background-color: white;
     border:0;
     height: 80px;
-    font-size: 16px;
+    font-size: 2vw;
+}
+#NavMenu{
+    background-color: white;
+    position: absolute;
+    top:0;
+    align-items: center;
+    left:100px;
+    height: 100%;
+    padding:0;
+}
+#NavBox1{
+    position: relative;
+    top:0;
+    left :0;
+}
+
+#NavBox2{
+    position: relative;
+    top:0;
+    left :4vw;
+}
+#NavBox3{
+    position: relative;
+    top:0;
+    left :8vw;
+}
+#NavBox4{
+    position: relative;
+    left:12vw;
+}
+.NavSize{
+    width:10%;
 }
 .center{
     font-size: 14px;
@@ -69,9 +95,6 @@ span{
 }
 #HIW,#AU,#FAQ{
     background-color: white;
-}
-#HIW-Heading1 {
-    margin: 51px 0 34px;
 }
 #logo{
     width: 80px;
@@ -102,17 +125,20 @@ span{
     flex-direction: row;
 }
 .flex_container div{
-    width:150px;
-    min-width: 20px;
+    width:20%;
     text-align: center;
     text-wrap: wrap;
 }
 #box1{
-    height: 150px;
+    height: 200px;
+}
+#box2{
+    position: relative;
+
 }
 .InstructionImg{
-    width: 80px;
-    height: 80px;
+    width: 10vw;
+    height: 10vw;
 }
 #BGI{
     margin:auto;
@@ -147,11 +173,20 @@ span{
     background-color: #0071bc;
     border-radius: 40px;
     height: 50px;
-    font-size: 20px;
+    font-size: 2vw;
 }
-
-@media screen and (max-width: 575px) {
-    #NavHeader {
-        flex-direction: column;
+#SigninButton:hover{
+    background-color: #0099ff;
+}
+.contentheader{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+@media screen and (min-width: 925px){
+    .Navigation{
+        font-size: 16px;
+    }
+    #SigninButton{
+        font-size: 16px;
     }
 }
