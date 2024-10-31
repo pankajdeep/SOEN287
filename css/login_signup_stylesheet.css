@@ -188,3 +188,22 @@ a {
     color: #0051ff;
     text-decoration: none;
 }
+#Warning{
+    color:red;
+}
+#tempButton{
+    align-items: center;
+    margin-top: 15px;
+    border-radius: 20px;
+    border: none;
+    width: 170px;
+    height: 40px;
+    padding-left: 10px;
+    background: rgb(230, 70, 49);
+    color: white;
+}
+#tempButton:hover{
+    outline: none;
+    background: rgb(255, 90, 68);
+    color: white;
+}
