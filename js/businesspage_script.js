@@ -119,7 +119,7 @@ logoFile.addEventListener('change', function(event) {
 
 function changeLogo(fileName) {
     let currentLogo = document.getElementById('current-logo');
-    currentLogo.src = `http://127.0.0.1:5500/SOEN287/Images/${fileName}`;
+    currentLogo.src = `./Images/${fileName}`;
 
     let changeFileContainer = document.getElementById('change-file');
     changeFileContainer.removeChild(changeFileContainer.children[1]);
