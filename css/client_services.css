@@ -1,0 +1,208 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+}
+
+/* Flex container to align sidebar and main content */
+.container {
+    display: flex;
+}
+
+/* Navigation bar styling */
+nav {
+    background-color: #12171e;
+    padding: 1rem;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-center {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+.navbar li {
+    list-style: none;
+}
+
+.navbar li a {
+    color: white;
+    text-decoration: none;
+    padding: 1rem;
+    display: block;
+}
+
+.navbar-center li {
+    margin: 0 1rem;
+}
+
+/* Sidebar styling */
+.sidebar {
+    position: fixed;
+    box-shadow: 5px 0px 8px rgba(0, 0, 0, 0.329);
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 80px;
+    background-color: #161d28;
+    padding: 0.4rem 0.8rem;
+    transition: all 0.5s ease;
+}
+
+.sidebar.active {
+    width: 250px;
+}
+
+.sidebar #btn {
+    position: absolute;
+    color: white;
+    top: .4rem;
+    left: 50%;
+    font-size: 1.2rem;
+    line-height: 50px;
+    transform: translateX(-50%);
+    cursor: pointer;
+}
+
+.user p, .nav-item, .logo {
+    color: white;
+    opacity: 0;
+}
+
+.sidebar.active p, .sidebar.active .nav-item, .sidebar.active .logo {
+    opacity: 1;
+}
+
+.sidebar ul li {
+    position: relative;
+    list-style-type: none;
+    margin: 0.8rem auto;
+}
+
+.sidebar ul li a {
+    color: rgb(189, 189, 189);
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+}
+
+.sidebar ul li a:hover {
+    background-color: #1f2732;
+    color: #ffffff;
+}
+/* Sidebar Styling */
+.sidebar {
+    position: fixed; /* Fixed positioning to overlay */
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 80px;
+    background-color: #161d28;
+    padding: 0.4rem 0.8rem;
+    transition: width 0.5s ease; /* Smooth transition */
+    z-index: 10; /* Ensures sidebar stays on top */
+}
+
+.sidebar.active {
+    width: 250px;
+}
+
+/* Main Content Styling */
+.main-content {
+    position: relative;
+    min-height: 100vh;
+    margin-left: 80px; /* Default left margin to match sidebar width */
+    width: calc(100% - 80px); /* Takes up remaining space */
+    padding: 1rem;
+    transition: margin-left 0.5s ease, width 0.5s ease; /* Smooth transition */
+}
+
+.sidebar.active ~ .main-content {
+    margin-left: 250px; /* Adjusts left margin when sidebar expands */
+    width: calc(100% - 250px); /* Adjusts width accordingly */
+}
+
+/* Main content area */
+/* .main-content {
+    margin-left: 80px;
+    padding: 2rem;
+    width: calc(100% - 80px);
+} */
+
+/* Form container */
+.form-container {
+    max-width: 400px;
+    padding: 20px;
+    background-color: #e7f3ff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem; /* Adds spacing from the top */
+    margin-left: 6rem;
+    
+}
+
+.service-form label {
+    display: block;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+.service-form select,
+.service-form input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.add-button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-button {
+    width: 40px;
+    height: 40px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button:hover {
+    background-color: #ddd;
+}
+.box-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
