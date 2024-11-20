@@ -86,37 +86,34 @@
         <div class="container">
 
             <!-- Profile Information Form -->
-            <form id="profileForm">
+            <form id="profileForm" action="/profileAction" method="POST">
                 <h2>Your Profile</h2><br>
-                <div class="form-group">
-                    <label for="name">First Name:</label>
-                    <input type="text" id="name" placeholder="First Name">
-                </div>
-                <div class="form-group">
-                    <label for="lastName">Last Name:</label>
-                    <input type="text" id="lastName" placeholder="Last Name">
-                </div>
-                <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input type="text" id="email" placeholder="Email Address">
-                </div>
-                <div class="form-group">
-                    <label for="address">Address:</label>
-                    <input type="text" id="address" placeholder="Address">
-                </div>
-                <div class="form-group">
-                    <label for="phoneNumber">Phone Number:</label>
-                    <input type="text" id="phoneNumber" placeholder="Phone Number">
-                </div>
-                <div class="form-group">
-                    <label for="password">New Password:</label>
-                    <input type="password" id="password" placeholder="Enter New Password">
-                </div>
+                <!-- Login credentials for authentication -->
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required placeholder="Your current email">
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Your current password">
+
+                <!-- Fields for updating profile -->
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="New First Name">
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="New Last Name">
+
+                <label for="newEmail">New Email:</label>
+                <input type="text" id="newEmail" name="newEmail" placeholder="New Email">
+
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="New Phone Number">
+
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
                 <br>
             
-                <!-- Update and Delete Buttons -->
-                <button type="button" onclick="updateProfile()"><pre>  Update Profile  </pre></button>
-                <button type="button" onclick="deleteAccount()" style="color: red;"><pre>  Delete Profile  </button>
+                <button type="submit" name="action" value="update" onclick="updateProfile()"><pre>  Update Profile  </pre></button>
+                <button type="submit" name="action" value="delete" onclick="deleteAccount()" style="color: red;"><pre>  Delete Profile  </pre></button>
             </form>
             
         </div>
