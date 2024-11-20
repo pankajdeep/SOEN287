@@ -1,5 +1,5 @@
 const clientData = {
-    name: "John",
+    firstName: "John",
     lastName: "Doe",
     email: "johndoe@example.com",
     password: "veryHardPassword",
@@ -71,7 +71,7 @@ function displayPastAppointments() {
 
 // Populate form fields with client data as placeholders
 function loadProfileData() {
-    document.getElementById('name').placeholder = clientData.name;
+    document.getElementById('firstName').placeholder = clientData.firstName;
     document.getElementById('lastName').placeholder = clientData.lastName;
     document.getElementById('email').placeholder = clientData.email;
     document.getElementById('address').placeholder = clientData.address;
