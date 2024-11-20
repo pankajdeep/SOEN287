@@ -1,5 +1,5 @@
 const clientData = {
-    name: "John",
+    firstName: "John",
     lastName: "Doe",
     email: "johndoe@example.com",
     password: "veryHardPassword",
@@ -112,7 +112,7 @@ function payForAppointment(service) {
 
 // Populate form fields with client data as placeholders
 function loadProfileData() {
-    document.getElementById('name').placeholder = clientData.name;
+    document.getElementById('firstName').placeholder = clientData.firstName;
     document.getElementById('lastName').placeholder = clientData.lastName;
     document.getElementById('email').placeholder = clientData.email;
     document.getElementById('address').placeholder = clientData.address;
@@ -121,7 +121,7 @@ function loadProfileData() {
 
 // Update clientData when form is submitted
 function updateProfile() {
-    clientData.name = document.getElementById('name').value || clientData.name;
+    clientData.firstName = document.getElementById('name').value || clientData.firstName;
     clientData.lastName = document.getElementById('lastName').value || clientData.lastName;
     document.getElementById('email').placeholder = clientData.email;
     clientData.address = document.getElementById('address').value || clientData.address;
