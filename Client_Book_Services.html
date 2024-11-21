@@ -84,10 +84,10 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="form-container">
-            <form class="service-form">
+            <form class="service-form" action="/addService" method="POST">
                 <h2>Book Service</h2> <br>
                 <label for="service">Service:</label>
-                <select id="service" name="service">
+                <select id="service" name="service" required>
                     <option value="" disabled selected>Select Service</option>
                     <option value="regular">Regular Interior Cleaning</option>
                     <option value="major">Major Interior Cleaning</option>
@@ -96,15 +96,15 @@
                 </select>
         
                 <label for="date">Date:</label>
-                <input type="date" id="date" name="date">
+                <input type="date" id="date" name="date" required>
         
                 <label for="address">Address:</label>
-                <input type="text" id="address" name="address" placeholder="Enter Address">
+                <input type="text" id="address" name="address" placeholder="Enter Address" required>
         
                 <label for="size">Room size:</label>
-                <input type="text" id="size" name="size" placeholder="Enter Room Size">
+                <input type="text" id="size" name="size" placeholder="Enter Room Size" required>
 
-                <button type="button" onclick="bookService()"><pre>  Book Service  </pre></button>
+                <button type="submit" onclick="bookService()" ><pre>  Book Service  </pre>
             </form>
             
         </div>

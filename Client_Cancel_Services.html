@@ -84,7 +84,7 @@
     <!-- Main Content -->
     <div class="main-content">
         <div class="form-container">
-            <form class="service-form">
+            <form class="service-form" action="cancelService" method="POST">
                 <h2>Cancel Service</h2> <br>
                 <label for="service">Service:</label>
                 <select id="service" name="service">
@@ -104,7 +104,7 @@
                 <label for="size">Room size:</label>
                 <input type="text" id="size" name="size" placeholder="Enter Room Size">
 
-                <input type="submit" value="Cancel Service" onclick="cancelService()" style="color: red;">
+                <input type="submit" value="Cancel Service" style="color: red;">
             </form>
             
         </div>

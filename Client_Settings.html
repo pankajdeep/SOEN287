@@ -85,12 +85,12 @@
     <div class="main-content">
         <div class="container">
 
-            <!-- Profile Information Form -->
-            <form id="profileForm" action="/profileAction" method="POST">
+            <!-- Profile Update Form -->
+            <form id="profileForm" action="/updateProfile" method="POST">
                 <h2>Your Profile</h2><br>
-                <!-- Login credentials for authentication -->
+                <!-- Login credentials for authentication
                 <label for="email">Email:</label>
-                <input type="text" id="email" name="email" required placeholder="Your current email">
+                <input type="text" id="email" name="email" required placeholder="Your current email"> -->
 
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" required placeholder="Your current password">
@@ -111,10 +111,14 @@
                 <label for="newPassword">New Password:</label>
                 <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
                 <br>
-            
-                <button type="submit" name="action" value="update" onclick="updateProfile()"><pre>  Update Profile  </pre></button>
-                <button type="submit" name="action" value="delete" onclick="deleteAccount()" style="color: red;"><pre>  Delete Profile  </pre></button>
+                <button type="submit">Update Profile</button>
             </form>
+
+            <!-- Profile Deletion Form -->
+            <form id="profileForm" action="/deleteProfile" method="POST">
+                <button type="submit" style="color: red;">Delete Profile</button>
+            </form>
+
             
         </div>
     </div>

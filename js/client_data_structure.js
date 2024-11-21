@@ -206,5 +206,5 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // Functions for Settings
-function bookService() {alert('Service booked');}
-function cancelService() {alert('Service canceled');}
+// function bookService() {alert('Service booked');}
+// function cancelService() {alert('Service canceled');}
