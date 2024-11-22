@@ -123,7 +123,7 @@ app.post("/updateProfile", (request, response) => {
     if (err) {
       return response.send("Could not update the client: " + err);
     }
-
+//msg is for the delete services 
     let sqlUser = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
     db.query(sqlUser, [clientID], (err, result) => {
       if (err) {
@@ -134,7 +134,7 @@ app.post("/updateProfile", (request, response) => {
       response.render("Client_Settings", {userName, message: "Your profile has been updated."});
     });
   });
-});
+});//
 
 // Delete profile
 app.post("/deleteProfile", (request, response) => {
@@ -144,13 +144,13 @@ app.post("/deleteProfile", (request, response) => {
     return response.status(401).send("No session found. Please log in.");
   }
 
-  let sql = "DELETE FROM clientInfo WHERE clientID = ?";
+  let sql = "DELETE FROM clientInfo WHERE clientID = ?";//noe clientinfo but active services
   db.query(sql, [clientID], (err, result) => {
     if (err) {
       console.error("Error deleting profile:", err);
       return response.send(`Could not delete the client with ID = ${clientID} \n ${err}`);
     }
-
+//above this for the delete service
     const message = "Your account has been deleted.";
 
     // Clear the session
