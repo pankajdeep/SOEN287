@@ -53,14 +53,52 @@ app.get("/addClient", (request, response) => {
   let sqlStatement = "INSERT INTO clientInfo SET ?";
   let query = db.query(sqlStatement, client, (err, result) => {
     if (err) {
-      response.send("Could not insert a new record!");
+      response.send("Could not insert a new client :(");
     } else {
-      response.send("Record inserted successfully!");
+      response.send("New client inserted successfully :D");
     }
   });
 });
 
-// Update Profile in the databse
+
+// Add first service as an admin (FOR TESTING, TO REMOVE LATER)
+app.get("/addProvidedService1", (request, response) => {
+  const providedService = {
+    name: "Regular interior cleaning",
+    description: "imma clean your insides ;)",
+    price: "50$"
+  };
+
+  let sqlStatement = "INSERT INTO businessProvidedServices SET ?";
+  db.query(sqlStatement, providedService, (err, result) => {
+    if (err) {
+      response.send("Could not insert a new provided service :(");
+    } else {
+      response.send("New provided service inserted successfully :D");
+    }
+  });
+});
+
+// Add second service as an admin (FOR TESTING, TO REMOVE LATER)
+app.get("/addProvidedService2", (request, response) => {
+  const providedService = {
+    name: "Major interior cleaning",
+    description: "imma MAJOR clean your insides ;)",
+    price: "100$"
+  };
+
+  let sqlStatement = "INSERT INTO businessProvidedServices SET ?";
+  db.query(sqlStatement, providedService, (err, result) => {
+    if (err) {
+      response.send("Could not insert a new provided service :(");
+    } else {
+      response.send("New provided service inserted successfully :D");
+    }
+  });
+});
+
+
+// Update profile
 app.post("/updateProfile", (request, response) => {
   const clientID = request.session.clientID;
 
@@ -126,6 +164,30 @@ app.post("/deleteProfile", (request, response) => {
   });
 });
 
+
+// Fill the service options in the form
+app.get("/addService", (request, response) => {
+  const sql = "SELECT name FROM businessProvidedServices";
+  
+  db.query(sql, (err, results) => {
+    if (err) {
+      console.error("Error fetching services:", err);
+      return response.status(500).send("Error fetching services.");
+    }
+
+    response.render("Client_Book_Services", { services: results });
+  });
+});
+
+
+// Book a service
+app.post("/addService", (request, response) => {
+  const clientID = request.session.clientID;
+  const { service, date, address } = request.body;
+
+  
+
+})
 
 // Display client name in sidebar (dashboard)
 app.get("/dashboard", (request, response) => {
