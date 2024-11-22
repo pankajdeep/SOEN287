@@ -35,7 +35,7 @@ db.connect((err) => {
 
 // Setting the session
 app.get("/setSession", (request, response) => {
-  request.session.clientID = "13"; // Hardcoded for now
+  request.session.clientID = "16"; // Hardcoded for now
   response.send("Session set with clientID: " + request.session.clientID);
 });
 
@@ -113,14 +113,15 @@ app.post("/deleteProfile", (request, response) => {
       return response.send(`Could not delete the client with ID = ${clientID} \n ${err}`);
     }
 
+    const message = "Your account has been deleted.";
+
     // Clear the session
-    request.session.message = "Your account has been deleted";
     request.session.destroy((err) => {
       if (err) {
         console.error("Error destroying session:", err);
         return response.status(500).send("Could not destroy session.");
       }
-      response.redirect("/settings");
+      response.render("Client_settings", {userName: "Guest", message});
     });
   });
 });
@@ -224,6 +225,7 @@ app.get("/receipt", (request, response) => {
 // Access to Client_Settings.ejs and Display client name in sidebar
 app.get("/settings", (request, response) => {
   const clientID = request.session.clientID;
+  const message = request.query.message || "";
 
   if (!clientID) {
     response.render("Client_Settings", { userName: "Guest", message: "" });
@@ -236,7 +238,6 @@ app.get("/settings", (request, response) => {
       return response.status(500).send("Could not retrieve data from the table.");
     }
     
-    const message = request.query.message || "";
     if (result.length > 0) {
       const userName = `${result[0].firstName} ${result[0].lastName}`;
       response.render("Client_Settings", { userName, message });
