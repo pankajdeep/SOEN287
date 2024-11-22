@@ -81,6 +81,26 @@ app.post("/updateProfile", (request, response) => {
   });
 });
 
+// Delete profile
+app.post("/deleteProfile", (request, response) => {
+  const clientID = request.session.clientID;
+
+  if (!clientID) {
+    return response.status(401).send("No session found. Please log in.");
+  }
+
+  let sql = "DELETE FROM clientInfo WHERE clientID = ?";
+  db.query(sql, [clientID], (err, result) => {
+    if (err) {
+      console.error("Error deleting profile:", err);
+      response.send(`Could not delete the client with ID = ${clientID} \n ${err}`);
+    } else {
+      response.send("Profile deleted successfully!");
+    }
+  });
+});
+
+
 app.listen(PORT,()=>{
   console.log(`Server running on port ${PORT}`);
 });
