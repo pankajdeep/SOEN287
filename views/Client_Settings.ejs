@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings</title> <!--Compagny name will be changed-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
+</head> 
+<body>
+    
+    <!-- Navigation bar -->
+    <!-- <nav>
+        <ul class="navbar">
+            <div class="navbar-left">
+                <li><a href="#" class="logo"><i class='bx bx-home-circle'></i></i> Pristine Clean</a></li>
+            </div>
+
+            <div class="navbar-center">
+                <li><a href="#">How it Works</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">About Us</a></li>
+            </div>
+        </ul>
+    </nav> -->
+
+
+    <!-- Side bar -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="Images/user-circle-solid-96.png" class="user-img" width="50px">
+            <div>
+                <p class="bold"><%= userName %></p>
+                <p>User</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="/dashboard">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/receipt">
+                    <i class='bx bxs-receipt'></i>
+                    <span class="nav-item">Receipt</span>
+                </a>
+            </li>
+            <li>
+                <a href="/book">
+                    <i class='bx bxs-cart-add' ></i>
+                    <span class="nav-item">Book Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="/cancel">
+                    <i class='bx bxs-cart' ></i>
+                    <span class="nav-item">Cancel Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="/settings">
+                    <i class="bx bxs-cog"></i>
+                    <span class="nav-item">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="LandingPage.html" id="red"> <!-- NOT SURE WHAT TO PUT HERE -->
+                    <i class='bx bx-log-out'></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+
+            <!-- Message that says "You're profile has been updated" if updated -->
+            <% if (message) { %>
+                <div class="alert">
+                  <%= message %>
+                </div>
+            <% } %>
+
+            <!-- Profile Update Form -->
+            <form id="profileForm" action="/updateProfile" method="POST">
+                <h2>Your Profile</h2><br>
+                <!-- Login credentials for authentication
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" required placeholder="Your current email"> -->
+
+                <!-- <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required placeholder="Your current password"> -->
+
+                <!-- Fields for updating profile -->
+                <label for="firstName">First Name:</label>
+                <input type="text" id="firstName" name="firstName" placeholder="New First Name">
+
+                <label for="lastName">Last Name:</label>
+                <input type="text" id="lastName" name="lastName" placeholder="New Last Name">
+
+                <label for="newEmail">New Email:</label>
+                <input type="text" id="newEmail" name="newEmail" placeholder="New Email">
+
+                <label for="phoneNumber">Phone Number:</label>
+                <input type="text" id="phoneNumber" name="phoneNumber" placeholder="New Phone Number">
+
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address" placeholder="New Address">
+
+                <label for="newPassword">New Password:</label>
+                <input type="password" id="newPassword" name="newPassword" placeholder="New Password">
+                <br>
+                <button type="submit">Update Profile</button>
+            </form>
+
+            <!-- Profile Deletion Form -->
+            <form id="profileForm" action="/deleteProfile" method="POST">
+                <button type="submit" style="color: red;">Delete Profile</button>
+            </form>
+
+            
+        </div>
+    </div>
+
+
+</body>
+<script src="js/client_data_structure.js"></script>
+<script>
+    let btn = document.querySelector("#btn")
+    let sidebar = document.querySelector('.sidebar')
+
+    // Toggle Sidebar
+    btn.onclick = function(){
+        sidebar.classList.toggle('active');
+    };
+</script>
+</html>
