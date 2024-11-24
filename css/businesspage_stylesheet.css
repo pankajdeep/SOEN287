@@ -4,7 +4,7 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-#sidebar {
+.sidebar {
     position: fixed;
     height: 100%;
     width: 250px;
@@ -14,8 +14,6 @@
 .menu-option {
     font-size: 1em; 
     font-weight: 500;
-    padding: 15px;
-    color: #fff;
 }
 
 .menu-option:hover {
@@ -23,24 +21,35 @@
     background-color: rgba(88, 81, 81); 
 }
 
-#main-content, #profile {
+.nav-link {
+    text-decoration: none;
+    color: #fff;
+    display: block;
+    padding: 15px;
+}
+
+.main-content, #profile, #account-form {
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#main-content {
+.main-content {
     width: calc(100% - 250px);
     height: 100%;
     float: right;
 }
 
-#editProfileInfo, #profile-table, #profile, #account-form, .input-container, #profile-editor, #add-services {
+#modify-services, #editProfileInfo, #profile-table, #profile, #account-form, .input-container, #profile-editor, #add-services {
     flex-direction: column;
 }
 
 #profile-table, #account-form, .input-container, #profile-editor, #add-services, #change-logo, .sign-and-print {
     display: flex;
+}
+
+#editProfileInfo {
+    display: none;
 }
 
 #editProfileInfo, #profile-table {
@@ -67,7 +76,7 @@
     margin-bottom: 5px;
 }
 
-#account-form input {
+#account-form input, #account-form textarea {
     padding: 8.75px 7.5px;
     border: 2px solid #000;
     border-radius: 5px;
@@ -96,10 +105,6 @@
 
 #profile-info td {
     width: 65%;
-}
-
-#editProfileInfo, #modify-services, #history, #bill-receipts {
-    display: none;
 }
 
 #account-form, #add-services {
@@ -155,7 +160,6 @@
 }
 
 .signature {
-    
     margin-top: 5px;
 }
 
@@ -174,17 +178,25 @@
     border-radius: 50%;
 }
 
-#logo-file-label, #changeLogoBTN {
+#profile-logo-file-label, #logo-file-label, #changeLogoBTN {
     background-color: #0450d5;
     color: white;
-    line-height: 1.2;
-    padding: 12.5px;
+
     border-radius: 4px;
     cursor: pointer;
 }
 
+#profile-logo-file-label {
+    font-size: 0.9em;
+    padding: 8.75px;
+}
+
+#logo-file-label, #changeLogoBTN {
+    padding: 12.5px;
+}
+
 #editProfileBTN:hover , #saveChanges:hover, #add-btn:hover, .table-btn:hover, 
-.print-btn:hover, #logo-file-label:hover, #changeLogoBTN:hover {
+.print-btn:hover, #profile-logo-file-label:hover, #logo-file-label:hover, #changeLogoBTN:hover {
     background-color: #2e63b9;
 }
 
@@ -195,7 +207,7 @@
     font-size: 0.9375em;
 }
 
-#logo-file {
+#profile-logo-file, #logo-file {
     opacity: 0;
     position: absolute;
     z-index: -1;
@@ -267,6 +279,7 @@ th {
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
+    line-height: 1.5;
 }
 
 .appointment-card .blue {
@@ -274,8 +287,16 @@ th {
     font-weight: bold;
 }
 
-.appointment-card .date {
-    font-weight: bold;
+.red {
+    color: red;
+}
+
+.green {
+    color: green;
+}
+
+.appointment-card .name, .appointment-card .email, .appointment-card .appointmentID, .appointment-card .date {
+    font-weight: 500;
 }
 
 .appointment-card .address, .appointment-card .price, 

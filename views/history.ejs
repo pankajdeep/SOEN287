@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Business Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/businesspage_stylesheet.css">  
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	</head>
+	<body>
+        <aside class="sidebar">
+            <ul>
+                <li class="menu-option">
+                    <a class="nav-link" href="/businessprofile">Business Profile</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/modifyservices">Modify Services</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/history">History</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/receipts">Bills & Receipts</a>
+                </li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <section id="history">
+                <h2><u>History</u></h2>
+                <div id="past-services">
+                    <% 
+                        let currentDate = new Date();
+                        let pastClients = clients.filter(client => {
+                            let clientDate = new Date(client.date);
+                            return clientDate < currentDate;
+                        });
+                    %>
+                    <% pastClients.forEach(client => { %>
+                        <div class="appointment-card">
+                            <div class="name">
+                                <strong>Name:</strong> <%= client.firstName %> <%= client.lastName %></h3>    
+                            </div>
+                            <div class="email">
+                                <strong>Email:</strong> <%= client.email %></h3>
+                            </div>                            
+                            <div class="appointmentID">
+                                <strong>AppointmentID:</strong> <%= client.appointmentID %>
+                            </div>
+                            <div class="date">
+                                <strong>Date:</strong> <%= client.date %> - <%= client.time %>
+                            </div>
+                            <div class="service-info">
+                                <span class="service" style="color: blue;"><%= client.service %></span>
+                                <div class="address" style="font-size: smaller;">Address: <%= client.active_address %></div>
+                            </div>
+                            <div class="price-status">
+                                <span class="price"><strong>Price:</strong> $<%= client.price %></span>
+                                <span class='<%= client.paid == '0' ? 'status green' : 'status red' %>'>
+                                    <%= client.paid == '0' ? 'Paid' : 'Unpaid' %>
+                                </span>
+                            </div>
+                        </div>
+                    <% }); %>
+                </div>
+            </section>
+        </main>
+        <script>
+            /*function displayHistory() {
+                const pastServicesContainer = document.querySelector('#past-services');
+
+                clientData.appointedServices.forEach(appointment => {
+
+                    const currentDate = new Date();
+                    const specificDate = new Date(appointment.date);
+
+                    if (specificDate < currentDate) {
+                        const appointmentCard = document.createElement('div');
+                        appointmentCard.classList.add('appointment-card');
+
+                        appointmentCard.innerHTML = `
+                            <div class="date"><strong>Date:</strong> ${appointment.date} - ${appointment.time}</div>
+                            <div class="service-info">
+                                <span class="service" style="color: blue;">${appointment.service}</span>
+                                <div class="address" style="font-size: smaller;">Address: ${appointment.address}</div>
+                            </div>
+                            <div class="price-status">
+                                <span class="price"><strong>Price:</strong> ${appointment.price}</span>
+                                <span class="status" style="color: ${appointment.paid ? 'green' : 'red'};">
+                                    ${appointment.paid ? 'Paid' : 'Unpaid'}
+                                </span>
+                            </div>
+                        `;
+                        pastServicesContainer.appendChild(appointmentCard);*
+                    }
+                });
+            }*/
+        </script>
+    </body>
+</html>

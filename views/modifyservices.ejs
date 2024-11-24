@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Business Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/businesspage_stylesheet.css">  
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	</head>
+	<body>
+        <aside class="sidebar">
+            <ul>
+                <li class="menu-option">
+                    <a class="nav-link" href="/businessprofile">Business Profile</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/modifyservices">Modify Services</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/history">History</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/receipts">Bills & Receipts</a>
+                </li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <section id="modify-services">
+                <header>
+                    <h2><u>Modify Services</u></h2>
+                </header>
+                <section id="add-services-section">
+                    <h3><u>Add Services</u>:</h3>
+                    <form method="POST" action="/addservice" id="add-services">
+                        <div class="input-container">
+                            <label for="serviceName">Name:</label>    
+                            <input type="text" id="serviceName" name="serviceName" required />
+                        </div>
+                        <div class="input-container">
+                            <label for="serviceDescription">Description:</label>
+                            <textarea class="textarea" id="serviceDescription" name="serviceDescription"></textarea>
+                        </div>
+                        <div class="input-container">
+                            <label for="price">Price:</label>
+                            <input type="number" min="5.00" id="price" name="price" required />
+                        </div>
+                        <button id="add-btn" type="submit" style="width:57.02px;margin-bottom:0;">Add</button>
+                    </form>
+                </section>
+                <table id="serviceTable">
+                    <tr>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th>Price ($)</th>
+                        <th>Action</th>
+                    </tr>
+                    <% businessprovidedservices.forEach(service => { %>
+                        <tr id="row-<%= service.serviceID %>">
+                            <td><%= service.name %></td>
+                            <td><%= service.description %></td>
+                            <td><%= service.price %></td>
+                            <td>
+                                <button class="table-btn" onclick="editData('<%= service.serviceID %>')">Edit</button>
+                                <form action="/deleteservice/<%= service.serviceID %>" method="POST">
+                                    <button class="table-btn" type="submit">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </table>
+            </section>
+        </main>
+        <script>
+            let logoFile = document.getElementById('logo-file');
+            logoFile.addEventListener('change', function(event) {
+                let fileName = event.target.files[0].name;
+                let fileInfo =  document.getElementById('file-info');
+                let changeFileInfo = `
+                    <strong>Chosen file:</strong>
+                    <span id="file-name">${fileName}</span>
+                `;
+                let changeFileContainer = document.getElementById('change-file');
+                let changeButton = document.createElement('button');
+                changeButton.id = "changeLogoBTN";
+                changeButton.textContent = "Change Logo";
+                changeButton.onclick = function() {
+                    changeLogo(fileName);
+                };
+                fileInfo.innerHTML = changeFileInfo;
+                changeFileContainer.appendChild(changeButton);
+            });
+
+            function changeLogo(fileName) {
+                let currentLogo = document.getElementById('current-logo');
+                currentLogo.src = `./Images/${fileName}`;
+
+                let changeFileContainer = document.getElementById('change-file');
+                changeFileContainer.removeChild(changeFileContainer.children[1]);
+
+                let fileInfo =  document.getElementById('file-info');
+                fileInfo.innerHTML = '';
+            }
+
+            // Modify Services
+
+            /*function addData() {
+                // Get input values
+                let name = document.services.serviceName.value;
+                let description = document.services.serviceDescription.value;
+                let price = document.services.price.value;
+
+                // Get the table and insert a new row at the end
+                let table = document.getElementById("serviceTable");
+                let newRow = table.insertRow(table.rows.length);
+
+                // Insert data into cells of the new row
+                newRow.insertCell(0).innerHTML = name;
+                newRow.insertCell(1).innerHTML = description;
+                newRow.insertCell(2).innerHTML = `$${price}`;
+                newRow.insertCell(3).innerHTML =
+                    '<button class="table-btn" onclick="editData(this)">Edit</button>' +
+                    '<button class="table-btn" onclick="deleteData(this)">Delete</button>';
+
+                // Clear input fields
+                clearInputs();
+            }*/
+
+            function editData(serviceID) {
+
+                let row = document.getElementById('row-' + serviceID);
+
+                // Get the cells within the row
+                let nameCell = row.cells[0];
+                let descriptionCell = row.cells[1];
+                let priceCell = row.cells[2];
+                let saveButtonCell = row.cells[3];
+
+                let nameValue = nameCell.textContent;
+                let descriptionText = descriptionCell.textContent;
+                let priceValue = priceCell.textContent;
+                
+                // Prompt the user to enter updated values
+                /*let nameInput =
+                    prompt("Enter the updated name:",
+                        nameCell.innerHTML);
+                let descriptionInput =
+                    prompt("Enter the updated description:",
+                        descriptionCell.innerHTML);
+                let priceInput =
+                    prompt("Enter the updated price:",
+                        priceCell.innerHTML);*/
+                
+                nameCell.innerHTML = `<input type="text" name="name" value="${nameValue}" id="name-${serviceID}">`;
+                descriptionCell.innerHTML = `<textarea type="text" name="description" id="description-${serviceID}">${descriptionText}</textarea>`;
+                priceCell.innerHTML = `<input type="number" name="price" value="${priceValue}" id="price-${serviceID}">`;
+                saveButtonCell.innerHTML = `<button class="table-btn" onclick="saveData(${serviceID})">Save</button>`;
+
+                // Update the cell contents with the new values
+                /*nameCell.innerHTML = nameInput;
+                descriptionCell.innerHTML = descriptionInput;
+                priceCell.innerHTML = priceInput;*/
+            }
+
+            function saveData(serviceID) {
+                const formData = new FormData();
+
+                let nameInput = document.getElementById('name-' + serviceID);
+                let descriptionInput = document.getElementById('description-' + serviceID);
+                let priceInput = document.getElementById('price-' + serviceID);
+
+                let updateName = nameInput.value;
+                let updateDescription = descriptionInput.value;
+                let updatePrice = priceInput.value;
+
+                formData.append('serviceName', updateName);
+                formData.append('serviceDescription', updateDescription);
+                formData.append('servicePrice', updatePrice);
+
+                let row = document.getElementById('row-' + serviceID);
+
+                // Get the cells within the row
+                let nameCell = row.cells[0];
+                let descriptionCell = row.cells[1];
+                let priceCell = row.cells[2];
+                let saveButtonCell = row.cells[3];
+
+                nameCell.innerHTML = updateName;
+                descriptionCell.innerHTML = updateDescription;
+                priceCell.innerHTML = updatePrice;
+                saveButtonCell.innerHTML = `<button class="table-btn" onclick="editData('${serviceID}')">Edit</button>
+                                <form action="/deleteservice/${serviceID}" method="POST">
+                                    <button class="table-btn" type="submit">Delete</button>
+                                </form>`;
+
+                fetch(`/updateservice/${serviceID}`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({serviceName: updateName, serviceDescription: updateDescription, price: updatePrice})
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        return response.text();
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    if (data.success) {
+                        console.log('Service updated successfully');
+                    }
+                    else {
+                        console.log('Error updating service');
+                    }
+                })
+                .catch((err) => console.error('Error:', err));
+            }
+
+            /*function deleteData(button) {
+
+                // Get the parent row of the clicked button
+                let row = button.parentNode.parentNode;
+
+                // Remove the row from the table
+                row.parentNode.removeChild(row);
+            }
+
+            function clearInputs() {
+
+                // Clear input fields
+                document.getElementById("serviceName").value = "";
+                document.getElementById("description").value = "";
+                document.getElementById("price").value = "";
+            }*/
+
+        </script>
+	</body>
+</html>

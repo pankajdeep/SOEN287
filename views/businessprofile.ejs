@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Business Page</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/businesspage_stylesheet.css">  
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+	</head>
+	<body>
+        <aside class="sidebar">
+            <ul>
+                <li class="menu-option">
+                    <a class="nav-link" href="/businessprofile">Business Profile</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/modifyservices">Modify Services</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/history">History</a>
+                </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/receipts">Bills & Receipts</a>
+                </li>
+            </ul>
+        </aside>
+        <main class="main-content">
+            <section id="profile">
+                <header>
+                    <h2><u>Profile</u></h2>
+                </header>
+                <div id="profile-editor">
+                    <div id="account-image">
+                        <img id="account-photo" class="photo-image" src=<%= "Images/" + businessinfo[0].logo %> alt="Account Photo" />
+                    </div>
+                    <div id="profile-table">
+                        <table id="profile-info">
+                            <% businessinfo.forEach(info => { %>
+                                <tr>
+                                    <th>Business Name:</th>
+                                    <td id="profile-name"><%= info.companyName %></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td id="profile-email"><%= info.email %></td>
+                                </tr>
+                                <tr>
+                                    <th>Phone Number:</th>
+                                    <td id="profile-phone"><%= info.phoneNumber %></td>
+                                </tr>
+                                <tr>
+                                    <th>Location:</th>
+                                    <td id="profile-location"><%= info.location %></td>
+                                </tr>
+                                <tr>
+                                    <th>Company Description:</th>
+                                    <td id="profile-company-description"><%= info.companyDescription %></td>
+                                </tr>
+                            <% }) %>
+                        </table>
+                        <button type="button" id="editProfileBTN" onclick="editProfile()">Edit Profile</button>
+                    </div>
+                    <div id="editProfileInfo">
+                        <form method="POST" action="/updatebusinessinfo" id="account-form" enctype="multipart/form-data">
+                            <div class="input-container" style="max-width:105px;">
+                                <input type="file" id="profile-logo-file" name="profile-logo-file" accept=".png, .jpg, .gif" value="<%= businessinfo[0].logo %>" required />
+                                <label for="profile-logo-file" id="profile-logo-file-label" style="margin:0;">+ Upload File</label>    
+                            </div>
+                            <div id="change-file">
+                                <div id="file-info">
+                                    <!--Changing the logo file-->
+                                </div>
+                            </div>
+                            <div class="input-container">
+                                <label for="name">Business Name:</label>
+                                <input id="name" name="name" type="text" value="<%= businessinfo[0].companyName %>" required /> 
+                            </div>
+                            <div class="input-container">
+                                <label for="email">Email Address:</label>
+                                <input id="email" name="email" type="email" value="<%= businessinfo[0].email %>" required />
+                            </div>
+                            <div class="input-container">
+                                <label for="phone_number">Phone Number:</label>
+                                <input id="phone_number" name="phone_number" type="tel" pattern="[0-9]{10}" value="<%= businessinfo[0].phoneNumber %>" required /> 
+                            </div>
+                            <div class="input-container">
+                                <label for="location">Location:</label>
+                                <input id="location" name="location" type="text" value="<%= businessinfo[0].location %>" required />
+                            </div>
+                            <div class="input-container">
+                                <label for="company_description">Company Description:</label>
+                                <textarea class="textarea" id="company_description" name="company_description" type="text" required><%= businessinfo[0].companyDescription %></textarea>
+                            </div>
+                            <button type="submit" id="saveChanges" onclick="saveChanges()">Submit Changes</button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <script>
+            function editProfile() {
+    
+                let profileTable = document.getElementById('profile-table');
+                let editProfileButton = document.getElementById('editProfileInfo');
+                
+                profileTable.style.display = "none";
+                editProfileButton.style.display = "flex";
+
+                /*document.getElementById('profile-logo-file').defaultValue = businessinfo[0].logo;
+
+                let profileName = document.getElementById('profile-name');
+                document.getElementById('name').defaultValue = profileName.textContent;
+
+                let profileEmail = document.getElementById('profile-email');
+                document.getElementById('email').defaultValue = profileEmail.textContent;
+
+                let profilePhone = document.getElementById('profile-phone');
+                document.getElementById('phone_number').defaultValue = profilePhone.textContent;
+
+                let profileLocation = document.getElementById('profile-location');
+                document.getElementById('location').defaultValue = profileLocation.textContent;
+
+                let profileCompanyDescription = document.getElementById('profile-company-description');
+                document.getElementById('company_description').defaultValue = profileCompanyDescription.textContent;*/
+            }
+
+            function saveChanges() {
+
+                let fileInfo =  document.getElementById('file-info');
+                fileInfo.innerHTML = '';
+
+                let profileTable = document.getElementById('profile-table');
+                let editProfileButton = document.getElementById('editProfileInfo');
+
+                profileTable.style.display = "flex";
+                editProfileButton.style.display = "none";
+            }
+
+            let logoFile = document.getElementById('profile-logo-file');
+            logoFile.addEventListener('change', function(event) {
+                let fileName = event.target.files[0].name;
+                let fileInfo =  document.getElementById('file-info');
+                let changeFileInfo = `
+                    <strong>Chosen file:</strong>
+                    <span id="logo-file-name">${fileName}</span>
+                `;
+                fileInfo.innerHTML = changeFileInfo;
+            });
+
+        </script>
+    </body>
+</html>
