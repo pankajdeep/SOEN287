@@ -25,7 +25,7 @@ db.connect((err) => {
         console.log("Connected");
     }
 });
-app.get("/LandingPage",(req,res)=>{
+app.get("/",(req,res)=>{
     //Check if the database is empty
     let sqlstatement="SELECT * FROM BUSINESSINFO";
     let searchforid = db.query(sqlstatement,(err,result)=>{
