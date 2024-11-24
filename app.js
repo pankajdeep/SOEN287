@@ -389,31 +389,6 @@ app.post("/addService", (request, response) => {
 });
 
 
-// Display client name in sidebar (dashboard)
-// app.get("/dashboard", (request, response) => {
-//   const clientID = request.session.clientID;
-//   // GET SERVICE ARRAYS HERE
-
-//   if (!clientID) {
-//     return response.status(401).send("No session found. Please log in.");
-//   }
-
-//   let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
-   
-//   db.query(sql, [clientID], (err, result) => {
-//     if (err) {
-//       return response.status(500).send("Could not retrieve data from the table.");
-//     }
-//     if (result.length > 0) {
-//       const userName = `${result[0].firstName} ${result[0].lastName}`;
-//       response.render("client_dashboard", { userName }); // ADD SERVICE ARRAYS HERE
-//     } else {
-//       response.render("Client_Dashboard", { userName: "Guest" }); // ADD SERVICE ARRAYS HERE
-//     }
-//   });
-// });
-
-
 // Display client name in sidebar (book service)
 app.get("/book", (request, response) => {
   const clientID = request.session.clientID;
@@ -476,31 +451,6 @@ app.get("/cancel", (request, response) => {
     });
   });
 });
-
-
-
-// Display client name in sidebar (receipt)
-// app.get("/receipts", (request, response) => {
-//   const clientID = request.session.clientID;
-
-//   if (!clientID) {
-//     return response.status(401).send("No session found. Please log in.");
-//   }
-
-//   let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
-   
-//   db.query(sql, [clientID], (err, result) => {
-//     if (err) {
-//       return response.status(500).send("Could not retrieve data from the table.");
-//     }
-//     if (result.length > 0) {
-//       const userName = `${result[0].firstName} ${result[0].lastName}`;
-//       response.render("Client_Receipt", { userName });
-//     } else {
-//       response.render("Client_Receipt", { userName: "Guest" });
-//     }
-//   });
-// });
 
 
 // Access to Client_Settings.ejs and Display client name in sidebar
