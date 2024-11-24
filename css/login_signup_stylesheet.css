@@ -117,7 +117,13 @@ input[type=text] {
     height: 30px;
     padding-left: 10px;
 }
-
+input[type=email] {
+    border-radius: 20px;
+    border: 1.7px solid #9c9c9c;
+    width: 449px;
+    height: 30px;
+    padding-left: 10px;
+}
 input[type=text]:focus {
     outline: none;
     border: 1.7px solid #0051ff;

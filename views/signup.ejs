@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title><%= BusinessInfo.companyName %></title>
+        <link rel="stylesheet" type="text/css" href="./css/login_signup_stylesheet.css">
+    </head>
+    <body>
+
+        <form action="/SubmitClientInfo" method="POST">
+            
+            <p style="text-align:center; color: #0071bc; font-weight: 700;">
+                <img src="<%= "./Images/"+ BusinessInfo.logo %>" width="150" ><br>
+                Award-Winning Cleaning Services in the World
+            </p>
+            <p style="text-align:center;"> Sparkling spaces, stress-free living—let us handle the mess! Experience the difference with <%= BusinessInfo.companyName %> Co., where every corner sparkles!</p>
+            <p>
+                <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
+                <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>  
+            </p>
+            <p><input type="email" id="email" name="email" placeholder="Email" required></p>
+            <p id="Warning"><%= Warning %></p>
+            <p><input type="text" id="phone" name="phone" placeholder="Phone Number" required></p>
+            <p><input type="text" id="address" name="address" placeholder="Address" required></p>
+            <p><input type="password" id="password" name="password" placeholder="Password" required></p>
+            <input type="submit" value="Sign Up">
+            
+        </form>
+        
+    </body>
+</html>

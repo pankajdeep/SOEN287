@@ -102,6 +102,7 @@ span{
 #logobox{
     background-color: white;
     width: 30%;
+    height: 100%;
 }
 #logo{
     position: relative;
