@@ -49,6 +49,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+//For removal
 app.get("/setSession", (req, res) => {
     req.session.businessID = "1";
     res.send("Session set with ID: " + req.session.businessID);
