@@ -7,6 +7,31 @@
     <title>Services</title> <!--Compagny name will be changed-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
+    <style>
+        table {
+            width: 100%;
+            /* padding: 8px; */
+            border: 0.5px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            border-spacing: 0;
+            border-collapse: separate;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            vertical-align: middle;
+            border: 1px solid #eeeeee;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #fbfbfb;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
 </head> 
 <body>
     
@@ -49,7 +74,7 @@
                 </a>
             </li>
             <li>
-                <a href="/receipt">
+                <a href="/receipts">
                     <i class='bx bxs-receipt'></i>
                     <span class="nav-item">Receipt</span>
                 </a>
@@ -73,7 +98,7 @@
                 </a>
             </li>
             <li>
-                <a href="LandingPage.html" id="red"> <!-- NOT SURE WHAT TO PUT HERE -->
+                <a href="LandingPage.html" id="red"> <!-- TO CHANGE -->
                     <i class='bx bx-log-out'></i>
                     <span class="nav-item">Logout</span>
                 </a>
@@ -92,29 +117,35 @@
           <% } %>
           
           <div class="form-container">
-            <form class="service-form" action="/cancelService" method="POST">
-                <h2>Cancel Service</h2>
-                <div>
-                    <% if (services && services.length > 0) { %>
-                      <ul>
-                        <% services.forEach(service => { %>
-                          <li>
-                            <label>
-                              <!-- Store the whole service object in the checkbox value -->
-                              <input type="checkbox" name="selectedServices" value="<%= JSON.stringify(service) %>">
-                              <%= service.service %> - 
-                              <%= service.price %> - 
-                              <%= service.address %> - 
-                              <%= service.date %> - 
-                              <%= service.time %>
-                            </label>
-                          </li>
-                        <% }) %>
-                      </ul>
-                    <% } else { %>
-                      <p>No services available to cancel.</p>
-                    <% } %>
-                  </div>
+            <form class="service-form" action="/deleteService" method="POST">
+                <h2>Cancel Service</h2><br>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Select</th>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% services.forEach(service => { %>
+                        <tr>
+                          <td>
+                            <input 
+                              type="checkbox" 
+                              name="selectedServices" 
+                              value="<%= service.appointmentID %>_<%= service.service %>_<%= service.date %>_<%= service.price %>_<%= service.address %>">
+                          </td>
+                          <td><%= service.service %></td>
+                          <td><%= service.price %></td>
+                          <td><%= service.address %></td>
+                          <td><%= service.date %></td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
                   <button type="submit">Cancel Selected Services</button>
               </form>              
           </div>

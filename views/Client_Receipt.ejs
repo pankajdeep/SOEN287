@@ -7,6 +7,31 @@
     <title>Receipts</title> <!--Compagny name will be changed-->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
+    <style>
+        table {
+            width: 100%;
+            /* padding: 8px; */
+            border: 0.5px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            border-spacing: 0;
+            border-collapse: separate;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            vertical-align: middle;
+            border: 1px solid #eeeeee;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #fbfbfb;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
 </head> 
 <body>
     
@@ -49,31 +74,31 @@
                 </a>
             </li>
             <li>
-                <a href="./Client_Receipt.html">
+                <a href="/receipts">
                     <i class='bx bxs-receipt'></i>
                     <span class="nav-item">Receipt</span>
                 </a>
             </li>
             <li>
-                <a href="./Client_Book_Services.html">
+                <a href="/book">
                     <i class='bx bxs-cart-add' ></i>
                     <span class="nav-item">Book Services</span>
                 </a>
             </li>
             <li>
-                <a href="./Client_Cancel_Services.html">
+                <a href="/cancel">
                     <i class='bx bxs-cart' ></i>
                     <span class="nav-item">Cancel Services</span>
                 </a>
             </li>
             <li>
-                <a href="./Client_Settings.html">
+                <a href="/settings">
                     <i class="bx bxs-cog"></i>
                     <span class="nav-item">Settings</span>
                 </a>
             </li>
             <li>
-                <a href="LandingPage.html" id="red">
+                <a href="LandingPage.html" id="red"> <!-- TO CHANGE -->
                     <i class='bx bx-log-out'></i>
                     <span class="nav-item">Logout</span>
                 </a>
@@ -83,22 +108,73 @@
 
     <!-- Main Content -->
     <div class="main-content">
-        <div class="container">
+        <!-- <div class="container"> -->
             <div class="receipt">
                 <h2>Receipt</h2> <br>
-                <h3>Unpaid Appointments</h3>
-                <div class="unpaid-appointments"></div>
-                <div class="total-due"></div>
-                <br><hr>
-                <br><h3>Paid Appointments</h3>
-                <div class="paid-appointments"></div>
-                <div class="total-paid"></div>
-            </div>
-        </div>
+
+                <!-- Unpaid Appointments Section -->
+                <h3>Your Unpaid Appointments</h3>
+                <form class="service-form" action="/processedReceipts" method="POST">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Address</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% unpaidServices.forEach(service => { %>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <input 
+                                            type="checkbox" 
+                                            name="selectedServices" 
+                                            value="<%= service.appointmentID %>_<%= service.service %>_<%= service.date %>_<%= service.price %>_<%= service.address %>"
+                                        >
+                                    </td>
+                                    <td><%= service.service %></td>
+                                    <td><%= service.price %></td>
+                                    <td><%= service.address %></td>
+                                    <td><%= service.date %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    
+                    <button type="submit">Pay Selected Services</button>
+                </form>
+                <br><hr><br>
+                
+                <!-- Paid Appointments Section -->
+                <h3>Your Paid Appointments</h3>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% paidServices.forEach(service => { %>
+                        <tr>
+                          <td><%= service.service %></td>
+                          <td><%= service.price %></td>
+                          <td><%= service.address %></td>
+                          <td><%= service.date %></td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+        <!-- </div> -->
     </div>
 
 </body>
-<script src="js/client_data_structure_receipt.js"></script>
+<!-- <script src="js/client_data_structure_receipt.js"></script> -->
 <script>
     let btn = document.querySelector("#btn")
     let sidebar = document.querySelector('.sidebar')

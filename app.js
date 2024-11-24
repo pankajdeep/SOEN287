@@ -33,7 +33,7 @@ db.connect((err) => {
   }
 });
 
-// Setting the session
+// Setting the session (FOR TESTING, TO REMOVE LATER)
 app.get("/setSession", (request, response) => {
   request.session.clientID = "17"; // Hardcoded for now
   response.send("Session set with clientID: " + request.session.clientID);
@@ -176,6 +176,7 @@ app.get("/cancelService", (request, response) => {
   }
 
   const sql = "SELECT * FROM activeServices WHERE clientID = ?";
+  const sqlUser = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
 
   db.query(sql, [clientID], (err, results) => {
     if (err) {
@@ -183,28 +184,45 @@ app.get("/cancelService", (request, response) => {
       return response.status(500).send("Error fetching services.");
     }
 
+    db.query(sqlUser, [clientID], (err, result) => {
+      if (err) {
+        console.error("Error fetching user details:", err);
+        return response.status(500).send("Error fetching user details.");
+      };
+
+    const userName = result.length > 0 
+      ? `${result[0].firstName} ${result[0].lastName}` 
+      : "Guest";
+
+
+    console.log(results);
     // Render the EJS template with the fetched services
-    response.render("Client_Cancel_Services", { services: results });
+    response.render("Client_Cancel_Services", {userName, services: results, message: "Service successfully deleted."});
+    });
   });
 });
 
-
-app.post("/cancelService", (request, response) => {
+app.post("/deleteService", (request, response) => {
   const clientID = request.session.clientID;
 
   if (!clientID) {
     return response.status(401).send("No session found. Please log in.");
   }
 
-  const selectedServices = request.body.selectedServices; // Expecting an array of strings
-  if (!selectedServices || selectedServices.length === 0) {
+  let selectedServices = request.body.selectedServices;
+  console.log(request.body.selectedServices)
+  if (!selectedServices) {
     return response.status(400).send("No services selected.");
   }
+  if (!Array.isArray(selectedServices)) {
+    selectedServices = [selectedServices]; // Convert single string to an array
+  }
+  console.log(selectedServices);
 
   const sqlDelete = "DELETE FROM activeServices WHERE clientID = ? AND appointmentID = ? AND service = ? AND date = ? AND price = ? AND address = ?";
 
-  selectedServices.forEach(item => {
-    const [appointmentID, service, date, price, address] = item.split("_");
+  selectedServices.forEach(selectedService => {
+    const [appointmentID, service, date, price, address] = selectedService.split("_");
 
     db.query(sqlDelete, [clientID, appointmentID, service, date, price, address], (err, result) => {
       if (err) {
@@ -214,12 +232,98 @@ app.post("/cancelService", (request, response) => {
     });
   });
 
-  response.redirect("/cancelService"); // Redirect after deletion (after the loop ends)
+  response.redirect("/cancelService");
+});
+
+
+// Paid and unpaid services
+app.get("/receipts", (request, response) => {
+  const clientID = request.session.clientID;
+
+  if (!clientID) {
+    return response.status(401).send("No session found. Please log in.");
+  }
+
+  const sql = "SELECT * FROM activeServices WHERE clientID = ?";
+  const sqlUser = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
+
+  db.query(sql, [clientID], (err, results) => {
+    if (err) {
+      console.error("Error fetching services:", err);
+      return response.status(500).send("Error fetching services.");
+    }
+
+    db.query(sqlUser, [clientID], (err, result) => {
+      if (err) {
+        console.error("Error fetching user details:", err);
+        return response.status(500).send("Error fetching user details.");
+      };
+
+    const userName = result.length > 0 
+      ? `${result[0].firstName} ${result[0].lastName}` 
+      : "Guest";
+
+      const unpaidServices = [];
+      const paidServices = [];
+
+      results.forEach(service => {
+        if (service.paid == 0) {
+          unpaidServices.push(service);
+        } else {
+          paidServices.push(service);
+        }
+      });
+
+    console.log(results);
+    // Render the EJS template with the fetched services
+    response.render("Client_Receipt", {userName, unpaidServices, paidServices});
+    });
+  });
+});
+
+
+app.post("/processedReceipts", (request, response) => {
+  const clientID = request.session.clientID;
+
+  if (!clientID) {
+    return response.status(401).send("No session found. Please log in.");
+  }
+
+  let selectedServices = request.body.selectedServices;
+
+  // Ensure selectedServices is always an array
+  if (!selectedServices) {
+    return response.status(400).send("No services selected.");
+  }
+  if (!Array.isArray(selectedServices)) {
+    selectedServices = [selectedServices]; // Convert single string to array
+  }
+
+  console.log(selectedServices);
+
+  const sqlUpdate = `
+    UPDATE activeServices 
+    SET paid = 1
+    WHERE clientID = ? AND appointmentID = ? AND service = ? AND date = ? AND price = ? AND address = ?
+  `;
+
+  selectedServices.forEach((selectedService) => {
+    const [appointmentID, service, date, price, address] = selectedService.split("_");
+
+    db.query(sqlUpdate, [clientID, appointmentID, service, date, price, address], (err, result) => {
+      if (err) {
+        console.error("Error paying service:", err);
+        return response.status(500).send("Error paying selected services.");
+      }
+    });
+  });
+
+  response.redirect("/receipts");
 });
 
 
 
-// Fill the service options in the form
+// Fill the service options in the form to book
 app.get("/addService", (request, response) => {
   const sql = "SELECT name FROM businessProvidedServices";
   
@@ -229,7 +333,7 @@ app.get("/addService", (request, response) => {
       return response.status(500).send("Error fetching services.");
     }
 
-    response.render("Client_Book_Services", { services: results });
+    response.render("Client_Book_Services", {services: results});
   });
 });
 
@@ -286,28 +390,28 @@ app.post("/addService", (request, response) => {
 
 
 // Display client name in sidebar (dashboard)
-app.get("/dashboard", (request, response) => {
-  const clientID = request.session.clientID;
-  // GET SERVICE ARRAYS HERE
+// app.get("/dashboard", (request, response) => {
+//   const clientID = request.session.clientID;
+//   // GET SERVICE ARRAYS HERE
 
-  if (!clientID) {
-    return response.status(401).send("No session found. Please log in.");
-  }
+//   if (!clientID) {
+//     return response.status(401).send("No session found. Please log in.");
+//   }
 
-  let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
+//   let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
    
-  db.query(sql, [clientID], (err, result) => {
-    if (err) {
-      return response.status(500).send("Could not retrieve data from the table.");
-    }
-    if (result.length > 0) {
-      const userName = `${result[0].firstName} ${result[0].lastName}`;
-      response.render("client_dashboard", { userName }); // ADD SERVICE ARRAYS HERE
-    } else {
-      response.render("Client_Dashboard", { userName: "Guest" }); // ADD SERVICE ARRAYS HERE
-    }
-  });
-});
+//   db.query(sql, [clientID], (err, result) => {
+//     if (err) {
+//       return response.status(500).send("Could not retrieve data from the table.");
+//     }
+//     if (result.length > 0) {
+//       const userName = `${result[0].firstName} ${result[0].lastName}`;
+//       response.render("client_dashboard", { userName }); // ADD SERVICE ARRAYS HERE
+//     } else {
+//       response.render("Client_Dashboard", { userName: "Guest" }); // ADD SERVICE ARRAYS HERE
+//     }
+//   });
+// });
 
 
 // Display client name in sidebar (book service)
@@ -350,7 +454,7 @@ app.get("/cancel", (request, response) => {
   }
 
   const sqlUser = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
-  const sqlServices = "SELECT service FROM activeServices WHERE clientID = ?";
+  const sqlServices = "SELECT * FROM activeServices WHERE clientID = ?";
 
   db.query(sqlUser, [clientID], (err, userResult) => {
     if (err) {
@@ -376,27 +480,27 @@ app.get("/cancel", (request, response) => {
 
 
 // Display client name in sidebar (receipt)
-app.get("/receipt", (request, response) => {
-  const clientID = request.session.clientID;
+// app.get("/receipts", (request, response) => {
+//   const clientID = request.session.clientID;
 
-  if (!clientID) {
-    return response.status(401).send("No session found. Please log in.");
-  }
+//   if (!clientID) {
+//     return response.status(401).send("No session found. Please log in.");
+//   }
 
-  let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
+//   let sql = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
    
-  db.query(sql, [clientID], (err, result) => {
-    if (err) {
-      return response.status(500).send("Could not retrieve data from the table.");
-    }
-    if (result.length > 0) {
-      const userName = `${result[0].firstName} ${result[0].lastName}`;
-      response.render("Client_Receipt", { userName });
-    } else {
-      response.render("Client_Receipt", { userName: "Guest" });
-    }
-  });
-});
+//   db.query(sql, [clientID], (err, result) => {
+//     if (err) {
+//       return response.status(500).send("Could not retrieve data from the table.");
+//     }
+//     if (result.length > 0) {
+//       const userName = `${result[0].firstName} ${result[0].lastName}`;
+//       response.render("Client_Receipt", { userName });
+//     } else {
+//       response.render("Client_Receipt", { userName: "Guest" });
+//     }
+//   });
+// });
 
 
 // Access to Client_Settings.ejs and Display client name in sidebar
@@ -469,7 +573,47 @@ app.get("/date", (request, response) => {
       });
     });
 });
-    
+
+// app.get("/receipts", (request, response) => {
+//   const clientID = request.session ? request.session.clientID : null;
+//   if (!clientID) {
+//       response.status(400).send('Client ID not found in session');
+//       return;
+//   }
+
+//   db.query(
+//     'SELECT service, paid FROM activeServices WHERE clientID = ?', //if you change the activeservice tavle here is some thingi you need to change
+//     [clientID],
+//     (error, results) => {
+//       if (error) {
+//         console.error('Error fetching services:', error);
+//         response.render("Client_Receipts", { paidServices: [], unpaidServices: [] }); // To add  pastServices and futureServices in Client_Dashboard.ejs
+//         return;
+//       }
+      
+//       const paidServices = [];
+//       const unpaidServices = [];
+
+//       let sqlUser = "SELECT firstName, lastName FROM clientInfo WHERE clientID = ?";
+//       db.query(sqlUser, [clientID], (err, result) => {
+//       if (err) {
+//         return response.status(500).send("Could not retrieve updated user data.");
+//       }
+      
+//       const userName = result.length > 0 ? `${result[0].firstName} ${result[0].lastName}` : "Guest";
+
+//       results.forEach(service => {
+//           if (service.paid == 0) {
+//             unpaidServices.push(service);
+//           } else {
+//             paidServices.push(service);
+//           }
+//       });
+      
+//       response.render('Client_Dashboard', { paidServices, unpaidServices, userName }); // To add  pastServices and futureServices in Client_Dashboard.ejs
+//       });
+//     });
+// });
 
 app.listen(PORT,()=>{
     console.log(`Server running on port ${PORT}`);
