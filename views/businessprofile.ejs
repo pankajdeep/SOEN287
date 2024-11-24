@@ -81,7 +81,7 @@
                             </div>
                             <div class="input-container">
                                 <label for="phone_number">Phone Number:</label>
-                                <input id="phone_number" name="phone_number" type="tel" pattern="[0-9]{10}" value="<%= businessinfo[0].phoneNumber %>" required /> 
+                                <input id="phone_number" name="phone_number" type="tel" pattern="\([0-9]{3}\) [0-9]{3}-[0-9]{4}" onblur="formatPhoneNumber()" value="<%= businessinfo[0].phoneNumber %>" required /> 
                             </div>
                             <div class="input-container">
                                 <label for="location">Location:</label>
@@ -122,6 +122,15 @@
 
                 let profileCompanyDescription = document.getElementById('profile-company-description');
                 document.getElementById('company_description').defaultValue = profileCompanyDescription.textContent;*/
+            }
+
+            function formatPhoneNumber() {
+                let p_number = document.getElementById("phone_number");
+                var cleaned = ('' + p_number.value).replace(/\D/g, '');
+                var match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
+                if (match) {
+                    p_number.value = '(' + match[1] + ') ' + match[2] + '-' + match[3];
+                }
             }
 
             function saveChanges() {
