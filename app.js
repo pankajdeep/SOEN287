@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const session = require('express-session');
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const app = express();
 
 // Set EJS as the view engine
@@ -14,11 +14,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // For JSON data
 app.use(session({
     secret: 'secret',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
+    //resave: false,
+    //saveUninitialized: true,
+    /*cookie: {
         maxAge: 60000
-    }
+    }*/
 }));
 
 const db = mysql.createConnection({
@@ -26,7 +26,7 @@ const db = mysql.createConnection({
     user: 'root',
     password: "",
     database: 'soen287',
-    port: 3308
+    //port: 3308
 });
 
 db.connect((err) => {
@@ -50,14 +50,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.get("/setSession", (req, res) => {
-    req.session.id = "0";
-    res.send("Session set with ID: " + req.session.id);
+    req.session.businessID = "1";
+    res.send("Session set with ID: " + req.session.businessID);
 });
 
 // Routes to go to menu sections
 app.get('/businessprofile', (req, res) => {
-    const id = req.session.id;
-
+    const id = req.session.businessID;
     const query = 'SELECT * FROM businessinfo WHERE id = ?';
 
     db.query(query, [id], (err, results) => {
@@ -121,8 +120,8 @@ app.post('/updatebusinessinfo', upload.single('profile-logo-file'), (req, res) =
     
     const logo = req.file.originalname;
 
-    const query = 'UPDATE businessinfo SET companyName = ?, email = ?, phoneNumber = ?, location = ?, companyDescription = ?, logo = ? WHERE ID = 0';
-    db.query(query, [name, email, phone_number, location, company_description, logo], (err, result) => {
+    const query = 'UPDATE businessinfo SET companyName = ?, email = ?, phoneNumber = ?, location = ?, companyDescription = ?, logo = ? WHERE ID = ?';
+    db.query(query, [name, email, phone_number, location, company_description, logo, req.session.businessID], (err, result) => {
         if (err) {
             console.error('Error uploading data: ', err);
             res.status(500).send('Error uploading data.');
