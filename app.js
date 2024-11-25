@@ -16,9 +16,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.set("views", path.join(__dirname, "views")); // Ensure views are in the correct folder
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
-});
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
