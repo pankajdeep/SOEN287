@@ -13,13 +13,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.set("views", path.join(__dirname, "views")); // Ensure views are in the correct folder
-const PORT=5000;
+const PORT=3306;
 
 const db = mysql.createConnection({
-    host: "localhost",
-    user: "root",
-    password:"",
-    database:"soen287"
+    host: "sql5.freesqldatabase.com",
+    user: "sql5747434",
+    password:"IJNFq1agaX",
+    database:"sql5747434"
 });
 db.connect((err) => {
     if (err) {
