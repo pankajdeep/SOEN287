@@ -13,7 +13,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(__dirname));
 app.set("views", path.join(__dirname, "views")); // Ensure views are in the correct folder
-const PORT=3306;
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 const db = mysql.createConnection({
     host: "sql5.freesqldatabase.com",
