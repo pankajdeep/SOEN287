@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Receipts</title> <!--Compagny name will be changed-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="css/client_dashboard_stylesheet.css">
+    <style>
+        table {
+            width: 100%;
+            /* padding: 8px; */
+            border: 0.5px solid #ccc;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            margin-top: 15px;
+            border-spacing: 0;
+            border-collapse: separate;
+            overflow: hidden;
+        }
+
+        table th, table td {
+            vertical-align: middle;
+            border: 1px solid #eeeeee;
+            padding: 8px;
+        }
+
+        table th {
+            background-color: #fbfbfb;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head> 
+<body>
+    
+    <!-- Navigation bar -->
+    <!-- <nav>
+        <ul class="navbar">
+            <div class="navbar-left">
+                <li><a href="#" class="logo"><i class='bx bx-home-circle'></i></i> Pristine Clean</a></li>
+            </div>
+
+            <div class="navbar-center">
+                <li><a href="#">How it Works</a></li>
+                <li><a href="#">Our Services</a></li>
+                <li><a href="#">About Us</a></li>
+            </div>
+        </ul>
+    </nav> -->
+
+
+    <!-- Side bar -->
+    <div class="sidebar">
+        <div class="top">
+            <div class="logo">
+
+            </div>
+            <i class="bx bx-menu" id="btn"></i>
+        </div>
+        <div class="user">
+            <img src="Images/user-circle-solid-96.png" class="user-img" width="50px">
+            <div>
+                <p class="bold"><%= userName %></p>
+                <p>User</p>
+            </div>
+        </div>
+        <ul>
+            <li>
+                <a href="/date">
+                    <i class="bx bxs-grid-alt"></i>
+                    <span class="nav-item">Dashboard</span>
+                </a>
+            </li>
+            <li>
+                <a href="/clientreceipts">
+                    <i class='bx bxs-receipt'></i>
+                    <span class="nav-item">Receipt</span>
+                </a>
+            </li>
+            <li>
+                <a href="/book">
+                    <i class='bx bxs-cart-add' ></i>
+                    <span class="nav-item">Book Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="/cancel">
+                    <i class='bx bxs-cart' ></i>
+                    <span class="nav-item">Cancel Services</span>
+                </a>
+            </li>
+            <li>
+                <a href="/settings">
+                    <i class="bx bxs-cog"></i>
+                    <span class="nav-item">Settings</span>
+                </a>
+            </li>
+            <li>
+                <a href="/" id="red"> <!-- TO CHANGE -->
+                    <i class='bx bx-log-out'></i>
+                    <span class="nav-item">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <!-- <div class="container"> -->
+            <div class="receipt">
+                <h2>Receipt</h2> <br>
+
+                <!-- Unpaid Appointments Section -->
+                <h3>Your Unpaid Appointments</h3>
+                <form class="service-form" action="/processedReceipts" method="POST">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Select</th>
+                                <th>Service Name</th>
+                                <th>Price</th>
+                                <th>Address</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% unpaidServices.forEach(service => { %>
+                                <tr>
+                                    <td style="text-align: center; vertical-align: middle;">
+                                        <input 
+                                            type="checkbox" 
+                                            name="selectedServices" 
+                                            value="<%= service.appointmentID %>_<%= service.service %>_<%= service.date %>_<%= service.price %>_<%= service.address %>"
+                                        >
+                                    </td>
+                                    <td><%= service.service %></td>
+                                    <td><%= service.price %></td>
+                                    <td><%= service.address %></td>
+                                    <td><%= service.date %></td>
+                                </tr>
+                            <% }); %>
+                        </tbody>
+                    </table>
+                    
+                    <button type="submit">Pay Selected Services</button>
+                </form>
+                <br><hr><br>
+                
+                <!-- Paid Appointments Section -->
+                <h3>Your Paid Appointments</h3>
+                <table>
+                    <thead>
+                      <tr>
+                        <th>Service Name</th>
+                        <th>Price</th>
+                        <th>Address</th>
+                        <th>Date</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% paidServices.forEach(service => { %>
+                        <tr>
+                          <td><%= service.service %></td>
+                          <td><%= service.price %></td>
+                          <td><%= service.address %></td>
+                          <td><%= service.date %></td>
+                        </tr>
+                      <% }); %>
+                    </tbody>
+                  </table>
+        <!-- </div> -->
+    </div>
+
+</body>
+<!-- <script src="js/client_data_structure_receipt.js"></script> -->
+<script>
+    let btn = document.querySelector("#btn")
+    let sidebar = document.querySelector('.sidebar')
+
+    // Toggle Sidebar
+    btn.onclick = function(){
+        sidebar.classList.toggle('active');
+    };
+</script>
+</html>
