@@ -7,7 +7,9 @@ const mysql= require("mysql");
 const app = express();
 app.set('view engine', 'ejs');
 app.use(session({
-    secret: 'secret'
+    secret: 'secret',
+    resave: false,
+    saveUninitialized: false,
 }));
 app.use(express.json()); 
 app.use(express.urlencoded({ extended: false }));
@@ -20,6 +22,7 @@ app.listen(PORT, () => {
 
 const db = mysql.createConnection({
   host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
   user: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_DBNAME,
