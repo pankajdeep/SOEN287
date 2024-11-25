@@ -22,6 +22,9 @@
                 <li class="menu-option">
                     <a class="nav-link" href="/receipts">Bills & Receipts</a>
                 </li>
+                <li class="menu-option">
+                    <a class="nav-link" href="/">Log Out</a>
+                </li>
             </ul>
         </aside>
         <main class="main-content">
@@ -42,7 +45,7 @@
                         </div>
                         <div class="input-container">
                             <label for="price">Price:</label>
-                            <input type="number" min="5.00" id="price" name="price" required />
+                            <input type="text" id="price" name="price" required />
                         </div>
                         <button id="add-btn" type="submit" style="width:57.02px;margin-bottom:0;">Add</button>
                     </form>
@@ -152,7 +155,7 @@
                 
                 nameCell.innerHTML = `<input type="text" name="name" value="${nameValue}" id="name-${serviceID}">`;
                 descriptionCell.innerHTML = `<textarea type="text" name="description" id="description-${serviceID}">${descriptionText}</textarea>`;
-                priceCell.innerHTML = `<input type="number" name="price" value="${priceValue}" id="price-${serviceID}">`;
+                priceCell.innerHTML = `<input type="text" name="price" value="${priceValue}" id="price-${serviceID}">`;
                 saveButtonCell.innerHTML = `<button class="table-btn" onclick="saveData(${serviceID})">Save</button>`;
 
                 // Update the cell contents with the new values

@@ -49,6 +49,7 @@ app.get("/",(req,res)=>{
         }
     });
     //If databse empty, make default business info and don't insert it
+    
     //Find the first business in the table as default
 
     //Will display first one found
