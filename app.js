@@ -44,18 +44,68 @@ app.get("/",(req,res)=>{
     //Check if the database is empty
     let sqlstatement="SELECT * FROM BUSINESSINFO";
     let searchforid = db.query(sqlstatement,(err,result)=>{
-        if(result.length==0){
-
+        if(err){
+            res.send("Could not get database");
+        }else{
+            if(result.length==0){
+                res.send("No Business Info in database");
+            }else{
+                if(req.session.businessID){
+                    businessinfos = result.filter(function(value,index,array){
+                        return ((result[index].ID===req.session.businessID));
+                    });
+                    if(businessinfos.length>0){
+                        let businessinfo={
+                            companyName: businessinfos[0].companyName,
+                            email: businessinfos[0].email,
+                            location:businessinfos[0].location,
+                            companyDescription:businessinfos[0].companyDescription,
+                            phoneNumber:businessinfos[0].phoneNumber,
+                            logo: businessinfos[0].logo
+                        };
+                        let getservices= "SELECT * FROM businessprovidedservices"
+                        let searchforservices= db.query(getservices,(err,services)=>{
+                            if(err){
+                                res.send("Could not find database for business provided services");
+                            }else{
+                                res.render("LandingPage.ejs",{Businessinfo: businessinfo , providedservice: services});
+                            }
+                        })
+                        
+                    }else{
+                        res.send("Could not find Business Info with given ID");
+                    }
+                }else{
+                    //Take the first one
+                    let businessinfo={
+                        companyName: result[0].companyName,
+                        email: result[0].email,
+                        location:result[0].location,
+                        companyDescription:result[0].companyDescription,
+                        phoneNumber:result[0].phoneNumber,
+                        logo: result[0].logo
+                    };
+                    let getservices= "SELECT * FROM businessprovidedservices"
+                        let searchforservices= db.query(getservices,(err,services)=>{
+                            if(err){
+                                res.send("Could not find database for business provided services");
+                            }else{
+                                res.render("LandingPage.ejs",{Businessinfo: businessinfo , providedservice: services});
+                            }
+                        })
+                }
+                
+            }
         }
     });
     //If databse empty, make default business info and don't insert it
-    
+
     //Find the first business in the table as default
 
     //Will display first one found
 
     //will change this later to ejs
-    res.sendFile(__dirname+"/LandingPage.html")
+    
 });
 app.get("/Signinchoice",(req,res)=>{
     req.session.warning="";
