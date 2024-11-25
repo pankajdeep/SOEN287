@@ -1,0 +1,151 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./css/landingpage_stylesheet.css">
+        <title><%= Businessinfo.companyName %>: Professional House Cleaning Montreal</title>
+    </head>
+    <body>
+        <div id="Info">
+            <div class="icon-info">
+                <img class = "TopPageIcons" src="./Images/Location_Icon.png" alt="Location image"> 
+                <span><%= Businessinfo.location%></span>
+            </div>
+            <div class="icon-info">
+                <img class = "TopPageIcons" src="./Images/Phone_Icon.png" alt="Phone image"> 
+                <span><%= Businessinfo.phoneNumber%></span>
+            </div>
+            <div class="icon-info">
+                <img class = "TopPageIcons" src="./Images/Email_Icon.png" alt="Email image"> 
+                <span><%= Businessinfo.email %></span>
+            </div>
+        </div>
+        <header id="NavHeader">
+            <div id="logobox"><a  href="#Info"><img id="logo" src="<%= "./Images/"+ Businessinfo.logo %>" alt="Logo"> </a></div>
+            <div id="NavMenu">
+                <a id="NavBox1" class="NavSize" href="#HIW"><button class="Navigation" type="button">HOW IT WORKS</button></a> 
+                <a id="NavBox2" class="NavSize" href="#OurS"><button  class="Navigation" type="button">OUR SERVICES</button></a>
+                <a id="NavBox3" class="NavSize" href="#AU"><button  class="Navigation" type="button">ABOUT US</button></a>
+                <form id="NavBox4" class="NavSize" method="GET" action="/Signinchoice"><button id="SigninButton" type="submit">Sign in / Log in</button></form>
+            </div>
+        </header>
+        <div id="BGI">
+            <pre id="preToSizeBGI">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            </pre>
+        </div>
+        <div id="HIW">
+            <h1 class="contentheader">How Does It Work?</h1>
+            <div id="box1" class="flex_container">
+                <div>
+                    <img class="InstructionImg" src="./Images/phone img.png" alt="">
+                </div>
+                <div>
+                    <img class="InstructionImg" src="./Images/sideways_arrow.png" alt="">
+                </div>
+                <div>
+                    <img class="InstructionImg" src="./Images/calender.png" alt="">
+                </div>
+                <div>
+                    <img class="InstructionImg" src="./Images/sideways_arrow.png" alt="">
+                </div>
+                <div>
+                    <img class="InstructionImg" src="./Images/broom.png" alt="">
+                </div>
+            </div>
+            <div id="box2" class="flex_container">
+                <div>
+                    Book your cleaning service using our online booking platform (no hidden fees).
+                </div>
+                <div>
+                </div>
+                <div>
+                    Select a date and time (we only charge you after the clean is completed).
+                </div>
+                <div>
+                </div>
+                <div>
+                    When the day arrives, we come clean your place. Satisfaction Guaranteed!
+                </div>
+            </div>
+        </div>
+        <br/>
+        <br/>
+        <div id="OurS">
+                <h1 class="contentheader">What Services Do We Offer?</h1>
+                <div class="container">
+                    <% providedservice.forEach( service => { %>
+                        <div class="center">
+                            <h2>
+                                <%= service.name%>
+                            </h2>
+                            <p>
+                                <%= service.description%>
+                            </p>
+                            <p>
+                                <%= service.price%>
+                            </p>
+                        </div>
+                        <br/>
+                        <br/>
+                    <% }) %>
+                </div>
+            <br/>
+            <br/>
+            <br/>
+        </div>
+        <div id="AU">
+            <br/>
+            <br/>
+            <br/>
+            <div>
+                <img id="AboutUsImg" src="./Images/Workers.jfif" alt="Workers Image" align="Left">
+                <h1 id="AboutUsh1">Professional Cleaning Services in Montreal</h1>
+                <p id="AboutUsText">
+                    At The Pristine Clean, we combine top-notch cleaning  services with unmatched customer service to create a stress free experience.
+                    <br/>
+                    <br/>
+                    Our mission is clear: consistently exceed your expectations. Whether it’s routine maintenance, a thorough deep clean, assistance with moving in or out, or even commercial cleaning, you can rely on us to tailor our services to meet your unique house cleaning and commercial cleaning needs.
+                    <br/>
+                    <br/>
+                    Why wait? Discover the convenience of booking your next cleaning online and experience The Clean Panther difference today.
+                </p>
+            </div>
+            <br/>
+            <br/>
+        </div>
+    </body>
+</html>
