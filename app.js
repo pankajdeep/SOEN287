@@ -45,7 +45,7 @@ const upload = multer({ storage: storage });
 
 app.get("/",(req,res)=>{
     //Check if the database is empty
-    let sqlstatement="SELECT * FROM BUSINESSINFO";
+    let sqlstatement="SELECT * FROM businessinfo";
     let searchforid = db.query(sqlstatement,(err,result)=>{
         if(err){
             res.send("Could not get database");
